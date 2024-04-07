@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose'
+import { IMessage } from '../interfaces/IMessage'
 
-const messageSchema = new Schema({
+const messageSchema = new Schema<IMessage>({
   _id: {
     type: Schema.Types.ObjectId,
     require: true,
@@ -22,4 +23,4 @@ const messageSchema = new Schema({
   },
 })
 
-export const message = model('message', messageSchema)
+export const message = model<IMessage>('message', messageSchema)

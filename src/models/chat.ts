@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose'
+import { IChat } from '../interfaces/IChat'
 
-const chatSchema = new Schema({
+const chatSchema = new Schema<IChat>({
   _id: {
     type: Schema.Types.ObjectId,
     require: true,
@@ -15,4 +16,4 @@ const chatSchema = new Schema({
     require: true,
   },
 })
-export const chat = model('chat', chatSchema)
+export const chat = model<IChat>('chat', chatSchema)
