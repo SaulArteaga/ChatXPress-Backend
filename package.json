@@ -1,0 +1,39 @@
+{
+  "name": "01asincrono",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/app.ts",
+    "start": "node ./dist/app",
+    "build": "npm run clean && tsc",
+    "exec": "npm run build & npm run start",
+    "clean": "rimraf dist",
+    "lint": "eslint --ignore-path .eslintignore src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.6.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  }
+}
