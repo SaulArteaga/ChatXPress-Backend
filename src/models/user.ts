@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+import { Schema, model } from 'mongoose'
 
-const Schema = mongoose.Schema
-
-const user = Schema({
+const userSchema = new Schema({
   _id: {
     type: Schema.Types.ObjectId,
     require: true,
@@ -38,3 +36,5 @@ const user = Schema({
     unique: true,
   },
 })
+
+export const user = model('user', userSchema)
