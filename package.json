@@ -1,5 +1,5 @@
 {
-  "name": "01asincrono",
+  "name": "proyecto-integracion",
   "version": "1.0.0",
   "engines": {
     "node": "18.x"
@@ -7,7 +7,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/app.ts",
+    "dev": "ts-node-dev --respawn src/index.ts",
     "start": "node ./dist/app",
     "build": "npm run clean && tsc",
     "exec": "npm run build & npm run start",
@@ -21,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/node": "^20.6.3",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
