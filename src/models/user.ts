@@ -2,11 +2,6 @@ import { Schema, model } from 'mongoose'
 import { IUser } from '../interfaces/IUser'
 
 const userSchema = new Schema<IUser>({
-  _id: {
-    type: Schema.Types.ObjectId,
-    require: true,
-    unique: true,
-  },
   name: {
     type: String,
     require: true,
@@ -39,4 +34,4 @@ const userSchema = new Schema<IUser>({
   },
 })
 
-export const user = model<IUser>('user', userSchema)
+export const user = model<IUser>('users', userSchema)

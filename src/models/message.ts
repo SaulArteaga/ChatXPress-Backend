@@ -23,4 +23,4 @@ const messageSchema = new Schema<IMessage>({
   },
 })
 
-export const message = model<IMessage>('message', messageSchema)
+export const message = model<IMessage>('messages', messageSchema)
