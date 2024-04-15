@@ -38,6 +38,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "bson": "^6.6.0",
     "express": "^4.19.2",
     "mongoose": "^8.3.0"
   }

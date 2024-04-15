@@ -1,11 +1,16 @@
 import UserDb from '../db/users.db'
 
-const getUser = async () => {
-  return await UserDb.getUser()
+const getUsers = async () => {
+  return await UserDb.getUsers()
 }
 
-const UserService = {
+const getUser = async (id: string) => {
+  return await UserDb.getUser(id)
+}
+
+const UsersService = {
+  getUsers,
   getUser,
 }
 
-export default UserService
+export default UsersService

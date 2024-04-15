@@ -1,5 +1,5 @@
 import express from 'express'
-import UserRoutes from './routes/users.routes'
+import UsersRoutes from './routes/users.routes'
 //import { user } from './models/user'
 //import { roles } from './models/role'
 
@@ -10,7 +10,7 @@ app.get('/hello', (_req, res) => {
   res.send('Muelto')
 })
 
-app.use('/api/v1', UserRoutes)
+app.use('/api/v1', UsersRoutes)
 
 // app.get('/roles', async (_req, res) => {
 //   const roless = await roles.find()
