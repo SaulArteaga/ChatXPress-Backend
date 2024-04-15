@@ -9,4 +9,4 @@ const roleSchema = new Schema({
     require: true,
   },
 })
-export const roles = mongoose.model('roles', roleSchema)
+export const role = mongoose.model('roles', roleSchema)

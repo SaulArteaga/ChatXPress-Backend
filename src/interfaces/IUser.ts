@@ -1,4 +1,5 @@
-import { Types } from 'mongoose'
+import { DBRef } from 'bson'
+//import { Types } from 'mongoose'
 
 export interface IUser {
   name: String
@@ -7,5 +8,5 @@ export interface IUser {
   department: String
   isActive: Boolean
   password: String
-  idRole: Types.ObjectId
+  idRole: DBRef
 }

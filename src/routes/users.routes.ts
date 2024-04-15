@@ -5,5 +5,6 @@ const UserRoutes = express.Router()
 
 UserRoutes.get('/users', UserController.getUsers)
 UserRoutes.get('/user/:id', UserController.getUser)
+UserRoutes.post('/user', UserController.postUser)
 
 export default UserRoutes
