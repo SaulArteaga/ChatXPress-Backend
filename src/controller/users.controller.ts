@@ -1,8 +1,6 @@
 import { Request, Response } from 'express'
 import UserService from '../services/users.service'
-import { role } from '../models/role'
 import { IUser } from '../interfaces/IUser'
-import { user } from '../models/user'
 import RoleService from '../services/roles.service'
 
 const getUsers = async (_req: Request, res: Response) => {
@@ -17,11 +15,11 @@ const getUsers = async (_req: Request, res: Response) => {
   }
 }
 
-const getUser = async (req: Request, res: Response) => {
-  const user = await UserService.getUser(req.params.id)
+const getUserById = async (req: Request, res: Response) => {
+  const user = await UserService.getUserById(req.params.id)
   try {
     if (!user) {
-      res.status(400).send({ message: 'No hay ningun usuario en la base de datos' })
+      res.status(400).send({ message: 'No existe el usuario en la base de datos' })
     }
     res.status(200).send(user)
   } catch (error) {
@@ -32,7 +30,7 @@ const getUser = async (req: Request, res: Response) => {
 const postUser = async (req: Request, res: Response) => {
   try {
     const idRoleUser = await RoleService.getStandarRoleId()
-    const getEmail = await user.find({ email: req.body.email })
+    const getEmail = await UserService.getUserByEmail(req.body.email)
     if (getEmail.length != 0) {
       res.status(400).send({ message: 'Error ya existe ese usuario' })
     } else {
@@ -58,10 +56,28 @@ const postUser = async (req: Request, res: Response) => {
   }
 }
 
+const getUserByEmail = async (req: Request, res: Response) => {
+  try {
+    const userByEmail = await UserService.getUserByEmail(req.params.email)
+    if (userByEmail.length == 0) {
+      res.status(400).send({ message: 'No existe el usuario en la base de datos' })
+    } else {
+      res.status(200).send({
+        name: userByEmail[0].name,
+        email: userByEmail[0].email,
+        password: userByEmail[0].password,
+      })
+    }
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
 const UserController = {
   getUsers,
-  getUser,
+  getUserById,
   postUser,
+  getUserByEmail,
 }
 
 export default UserController

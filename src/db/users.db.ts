@@ -7,7 +7,7 @@ const getUsers = async () => {
   return users
 }
 
-const getUser = async (id: string) => {
+const getUserById = async (id: string) => {
   const objectId = new mongoose.Types.ObjectId(id)
   const dbUser = await user.findById(objectId)
   return dbUser
@@ -19,10 +19,16 @@ const postUser = async (newUser: IUser) => {
   return userStore
 }
 
+const getUserByEmail = async (email: string) => {
+  const userByEmail = await user.find({ email: email })
+  return userByEmail
+}
+
 const UserDb = {
   getUsers,
-  getUser,
+  getUserById,
   postUser,
+  getUserByEmail,
 }
 
 export default UserDb
