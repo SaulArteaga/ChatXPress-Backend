@@ -15,14 +15,7 @@ const getUser = async (id: string) => {
 }
 
 const postUser = async (newUser: IUser) => {
-  const _user = new user()
-  _user.name = newUser.name
-  _user.lastname = newUser.lastname
-  _user.email = newUser.email
-  _user.department = newUser.department
-  _user.isActive = newUser.isActive
-  _user.password = newUser.password
-  _user.idRole = newUser.idRole
+  const _user = new user(newUser)
   const userStore = await _user.save()
   return userStore
 }

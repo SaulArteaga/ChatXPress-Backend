@@ -13,6 +13,7 @@ const userSchema = new Schema<IUser>({
   email: {
     type: String,
     require: true,
+    unique: true,
   },
   department: {
     type: String,
@@ -29,7 +30,6 @@ const userSchema = new Schema<IUser>({
   idRole: {
     type: Schema.Types.ObjectId,
     require: true,
-    unique: true,
     ref: 'role',
   },
 })
