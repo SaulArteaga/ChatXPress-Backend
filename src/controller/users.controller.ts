@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
-import UserService from '../services/user.service'
+import UserService from '../services/users.service'
 import { role } from '../models/role'
 import { IUser } from '../interfaces/IUser'
 import { user } from '../models/user'
+import RoleService from '../services/roles.service'
 
 const getUsers = async (_req: Request, res: Response) => {
   const users = await UserService.getUsers()
@@ -30,7 +31,7 @@ const getUser = async (req: Request, res: Response) => {
 
 const postUser = async (req: Request, res: Response) => {
   try {
-    const idRoleUser = await role.find({ nameRole: 'user' })
+    const idRoleUser = await RoleService.getStandarRoleId()
     const getEmail = await user.find({ email: req.body.email })
     if (getEmail.length != 0) {
       res.status(400).send({ message: 'Error ya existe ese usuario' })
@@ -42,7 +43,7 @@ const postUser = async (req: Request, res: Response) => {
         department: req.body.department,
         isActive: false,
         password: req.body.password,
-        idRole: idRoleUser[0]._id,
+        idRole: idRoleUser,
       }
 
       const reponseUser = await UserService.postUser(newuser)

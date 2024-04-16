@@ -13,10 +13,10 @@ const postUser = async (newUser: IUser) => {
   return await UserDb.postUser(newUser)
 }
 
-const UsersService = {
+const UserService = {
   getUsers,
   getUser,
   postUser,
 }
 
-export default UsersService
+export default UserService

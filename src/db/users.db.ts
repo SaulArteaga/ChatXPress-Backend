@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import { user } from '../models/user'
 import { IUser } from '../interfaces/IUser'
-// import { BSON, ObjectId } from 'bson'
 
 const getUsers = async () => {
   const users = await user.find()
