@@ -75,7 +75,18 @@ const getUserByEmail = async (req: Request, res: Response) => {
 
 const updateUserByEmail = async (req: Request, res: Response) => {
   try {
-    const updateUserByEmail = await UserService.updateUserByEmail(req.params.email, req.body)
+    const idRoleUser = await RoleService.getStandarRoleId()
+    const updatedUser: IUser = {
+      name: req.body.name,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      department: req.body.department,
+      isActive: false,
+      password: req.body.password,
+      idRole: idRoleUser,
+    }
+
+    const updateUserByEmail = await UserService.updateUserByEmail(req.body.email, updatedUser)
     if (!updateUserByEmail) {
       res.status(400).send({ message: 'No existe usuario en la base de datos' })
     } else {
