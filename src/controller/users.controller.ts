@@ -86,12 +86,26 @@ const updateUserByEmail = async (req: Request, res: Response) => {
   }
 }
 
+const deleteUserByEmail = async (req: Request, res: Response) => {
+  try {
+    const deleteUserByEmail = await UserService.deleteUserByEmail(req.params.email)
+    if (!deleteUserByEmail) {
+      res.status(400).send({ message: 'No existe usuario en la base de datos' })
+    } else {
+      res.status(200).send({ message: 'Usuario eliminado correctamente' })
+    }
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
 const UserController = {
   getUsers,
   getUserById,
   postUser,
   getUserByEmail,
   updateUserByEmail,
+  deleteUserByEmail,
 }
 
 export default UserController

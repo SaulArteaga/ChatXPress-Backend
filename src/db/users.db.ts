@@ -29,12 +29,18 @@ const updateUserByEmail = async (email: string, body: IUser) => {
   return isUpdated
 }
 
+const deleteUserByEmail = async (email: string) => {
+  const isDeleted = await user.deleteOne({ email: email })
+  return isDeleted
+}
+
 const UserDb = {
   getUsers,
   getUserById,
   postUser,
   getUserByEmail,
   updateUserByEmail,
+  deleteUserByEmail,
 }
 
 export default UserDb

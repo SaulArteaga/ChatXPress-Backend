@@ -21,12 +21,17 @@ const updateUserByEmail = async (email: string, body: IUser) => {
   return await UserDb.updateUserByEmail(email, body)
 }
 
+const deleteUserByEmail = async (email: string) => {
+  return await UserDb.deleteUserByEmail(email)
+}
+
 const UserService = {
   getUsers,
   getUserById,
   postUser,
   getUserByEmail,
   updateUserByEmail,
+  deleteUserByEmail,
 }
 
 export default UserService
