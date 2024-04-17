@@ -7,5 +7,6 @@ UserRoutes.get('/users', UserController.getUsers)
 UserRoutes.get('/user/:id', UserController.getUserById)
 UserRoutes.post('/user', UserController.postUser)
 UserRoutes.get('/user/email/:email', UserController.getUserByEmail)
+UserRoutes.put('/user/update/:email', UserController.updateUserByEmail)
 
 export default UserRoutes

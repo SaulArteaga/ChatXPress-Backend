@@ -24,11 +24,17 @@ const getUserByEmail = async (email: string) => {
   return userByEmail
 }
 
+const updateUserByEmail = async (email: string, body: IUser) => {
+  const isUpdated = await user.updateOne({ email: email }, body)
+  return isUpdated
+}
+
 const UserDb = {
   getUsers,
   getUserById,
   postUser,
   getUserByEmail,
+  updateUserByEmail,
 }
 
 export default UserDb

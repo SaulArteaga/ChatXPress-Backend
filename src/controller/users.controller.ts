@@ -73,11 +73,25 @@ const getUserByEmail = async (req: Request, res: Response) => {
   }
 }
 
+const updateUserByEmail = async (req: Request, res: Response) => {
+  try {
+    const updateUserByEmail = await UserService.updateUserByEmail(req.params.email, req.body)
+    if (!updateUserByEmail) {
+      res.status(400).send({ message: 'No existe usuario en la base de datos' })
+    } else {
+      res.status(200).send({ message: 'Usuario actualizado correctamente' })
+    }
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
 const UserController = {
   getUsers,
   getUserById,
   postUser,
   getUserByEmail,
+  updateUserByEmail,
 }
 
 export default UserController
