@@ -1,12 +1,10 @@
-// import mongoose from 'mongoose'
-
 import { WEB_CONFIG } from './constants/web.config'
 import app from './app'
 import { connect } from './db/database'
 
-// const urlMongo = 'mongodb://helpdev:123456@localhost:27017/'
-
-// const urlMongo = 'mongodb+srv://admin2:adminadmin@prueba.jjuvtzw.mongodb.net/pruebadb?retryWrites=true&w=majority'
+/**
+ * Create the connection to the database.
+ */
 
 connect()
   .then(() => {
@@ -15,6 +13,12 @@ connect()
   .catch(() => {
     console.log('No se puede conectar con el servidor')
   })
+
+/**
+ * We launch the application by making it
+ * listen on the indicated port
+ */
+
 app.listen(WEB_CONFIG.PORT, () => {
   console.log('Servidor iniciado en el puerto 3000')
 })

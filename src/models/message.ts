@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose'
 import { IMessage } from '../interfaces/IMessage'
 
+/**
+ * This is the scheme of the messages
+ * where we indicate the required fields
+ */
+
 const messageSchema = new Schema<IMessage>({
   _id: {
     type: Schema.Types.ObjectId,
@@ -22,5 +27,10 @@ const messageSchema = new Schema<IMessage>({
     require: true,
   },
 })
+
+/**
+ * We export the model relating it to the mongo collection
+ * we indicate
+ */
 
 export const message = model<IMessage>('messages', messageSchema)

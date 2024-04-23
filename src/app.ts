@@ -1,21 +1,22 @@
 import express from 'express'
 import UsersRoutes from './routes/users.routes'
-//import { user } from './models/user'
-//import { roles } from './models/role'
 
 const app = express()
 app.use(express.json())
+
+/**
+ * We create a test endpoint to check
+ * if the application works correctly.
+ */
 
 app.get('/hello', (_req, res) => {
   res.send('Muelto')
 })
 
-app.use('/api/v1', UsersRoutes)
+/**
+ * We add the routes of the application we are creating
+ */
 
-// app.get('/roles', async (_req, res) => {
-//   const roless = await roles.find()
-//   console.log(roless)
-//   res.status(200).send(roless)
-// })
+app.use('/api/v1', UsersRoutes)
 
 export default app

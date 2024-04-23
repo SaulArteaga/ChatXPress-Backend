@@ -3,6 +3,11 @@ import UserController from '../controller/users.controller'
 
 const UserRoutes = express.Router()
 
+/**
+ * All routes are entered with their respective verb methods
+ * and the controller functions to be executed.
+ */
+
 UserRoutes.get('/users', UserController.getUsers)
 UserRoutes.get('/user/:id', UserController.getUserById)
 UserRoutes.post('/user', UserController.postUser)

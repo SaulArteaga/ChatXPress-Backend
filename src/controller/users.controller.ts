@@ -3,6 +3,17 @@ import UserService from '../services/users.service'
 import { IUser } from '../interfaces/IUser'
 import RoleService from '../services/roles.service'
 
+/**
+ * This function has to return the list of
+ * all users at a given endpoint (/api/v1/users).
+ * @param res answer we return.
+ * @returns
+ * If we have users we return them with a status of 200.
+ * If we have no users in the database we return a message
+ * that there are no users with a status of 400.
+ * If the server fails, we return the error with a status of 500.
+ */
+
 const getUsers = async (_req: Request, res: Response) => {
   const users = await UserService.getUsers()
   try {
@@ -15,6 +26,18 @@ const getUsers = async (_req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function has to return a user by the id we specify
+ * in the url at a given endpoint (/api/v1/user/:id).
+ * @param req request where we collect the user's id.
+ * @param res answer we return.
+ * @returns
+ * If you get the user we return it with a status of 200.
+ * If you get no user, we return a message that
+ * the user does not exist with a status of 400.
+ * If the server fails, we return the error with a status of 500.
+ */
+
 const getUserById = async (req: Request, res: Response) => {
   const user = await UserService.getUserById(req.params.id)
   try {
@@ -26,6 +49,21 @@ const getUserById = async (req: Request, res: Response) => {
     res.status(500).send(error)
   }
 }
+
+/**
+ * This function we must add a user in the database
+ * at a given endpoint (/api/v1/user).
+ * @param req request where we collect the user's email.
+ * @param res answer we return.
+ * @returns
+ * If a user already exists with the email we want to enter,
+ * we send a message that the user already exists with status 400.
+ * If it is successfully added we indicate it with a message
+ * and a status 200.
+ * If it is not added correctly, an error message will be sent
+ * with a status of 400.
+ * If the server fails, we return the error with a status of 500.
+ */
 
 const postUser = async (req: Request, res: Response) => {
   try {
@@ -56,6 +94,18 @@ const postUser = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function has to return a user by the email we specify
+ * in the url at a given endpoint (/api/v1/user/email/:email).
+ * @param req request where we collect the user's email.
+ * @param res answer we return.
+ * @returns
+ * If you get the user we return it with a status of 200.
+ * If you get no user, we return a message that
+ * the user does not exist with a status of 400.
+ * If the server fails, we return the error with a status of 500.
+ */
+
 const getUserByEmail = async (req: Request, res: Response) => {
   try {
     const userByEmail = await UserService.getUserByEmail(req.params.email)
@@ -72,6 +122,20 @@ const getUserByEmail = async (req: Request, res: Response) => {
     res.status(500).send(error)
   }
 }
+
+/**
+ * This function must modify a user with an email passed by the url
+ * and using the data provided in the body, at a given endpoint
+ * (/api/v1/update:email).
+ * @param req request where we collect the user's email and the body.
+ * @param res answer we return.
+ * @returns
+ * If it is successfully updated we indicate it with a message
+ * and a status 200.
+ * If it is not updated correctly, an error message will be sent
+ * with a status of 400.
+ * If the server fails, we return the error with a status of 500.
+ */
 
 const updateUserByEmail = async (req: Request, res: Response) => {
   try {
@@ -96,6 +160,19 @@ const updateUserByEmail = async (req: Request, res: Response) => {
     res.status(500).send(error)
   }
 }
+
+/**
+ * This function must delete a user with an email passed by the url,
+ * at a given endpoint (/api/v1/delete:email).
+ * @param req request where we collect the user's email.
+ * @param res answer we return.
+ * @returns
+ * If it is successfully deleted we indicate it with a message
+ * and a status 200.
+ * If it is not removed correctly, an error message will be sent
+ * with a status of 400.
+ * If the server fails, we return the error with a status of 500.
+ */
 
 const deleteUserByEmail = async (req: Request, res: Response) => {
   try {

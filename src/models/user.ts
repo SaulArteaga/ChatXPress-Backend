@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose'
 import { IUser } from '../interfaces/IUser'
 
+/**
+ * This is the schema of a user where
+ * we indicate the required fields
+ */
+
 const userSchema = new Schema<IUser>({
   name: {
     type: String,
@@ -33,5 +38,10 @@ const userSchema = new Schema<IUser>({
     ref: 'role',
   },
 })
+
+/**
+ * We export the model relating it to the mongo collection
+ * we indicate
+ */
 
 export const user = model<IUser>('users', userSchema)
