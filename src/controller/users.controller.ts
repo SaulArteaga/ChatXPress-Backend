@@ -193,7 +193,7 @@ const loginUser = async (req: Request, res: Response) => {
     const roleUser = await RoleService.getRoleId(req.body.nameRole)
     const user = await UserService.getUserByEmail(req.body.email)
     if (user != null) {
-      if (req.body.password == user.password && roleUser.nameRole == req.body.nameRole) {
+      if (req.body.password == user.password && roleUser._id.toString() === user.idRole.toString()) {
         const userResponse: IUserResponse = {
           username: user.name,
           email: user.email,
