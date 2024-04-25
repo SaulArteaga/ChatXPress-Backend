@@ -14,5 +14,6 @@ UserRoutes.post('/user', UserController.postUser)
 UserRoutes.get('/user/email/:email', UserController.getUserByEmail)
 UserRoutes.put('/user/update/:email', UserController.updateUserByEmail)
 UserRoutes.delete('/user/delete/:email', UserController.deleteUserByEmail)
+UserRoutes.post('/user/login', UserController.loginUser)
 
 export default UserRoutes

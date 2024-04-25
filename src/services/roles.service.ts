@@ -1,4 +1,3 @@
-import { Types } from 'mongoose'
 import { role } from '../models/role'
 
 /**
@@ -7,13 +6,13 @@ import { role } from '../models/role'
  * @returns a promise with the object id
  */
 
-const getStandarRoleId = async (): Promise<Types.ObjectId> => {
-  const standarRole = await role.find({ nameRole: 'user' })
-  return standarRole[0]._id
+const getRoleId = async (nameRole: string) => {
+  const standarRole = await role.find({ nameRole: nameRole })
+  return standarRole[0]
 }
 
 const RoleService = {
-  getStandarRoleId,
+  getRoleId,
 }
 
 export default RoleService

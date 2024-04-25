@@ -47,7 +47,7 @@ const postUser = async (newUser: IUser) => {
 
 const getUserByEmail = async (email: string) => {
   const userByEmail = await user.find({ email: email })
-  return userByEmail
+  return userByEmail[0]
 }
 
 /**

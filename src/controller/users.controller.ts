@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import UserService from '../services/users.service'
 import { IUser } from '../interfaces/IUser'
 import RoleService from '../services/roles.service'
+import { IUserResponse } from '../interfaces/IUserResponse'
 
 /**
  * This function has to return the list of
@@ -67,9 +68,9 @@ const getUserById = async (req: Request, res: Response) => {
 
 const postUser = async (req: Request, res: Response) => {
   try {
-    const idRoleUser = await RoleService.getStandarRoleId()
+    const idRoleUser = await RoleService.getRoleId('user')
     const getEmail = await UserService.getUserByEmail(req.body.email)
-    if (getEmail.length != 0) {
+    if (getEmail != null) {
       res.status(400).send({ message: 'Error ya existe ese usuario' })
     } else {
       const newuser: IUser = {
@@ -79,7 +80,7 @@ const postUser = async (req: Request, res: Response) => {
         department: req.body.department,
         isActive: false,
         password: req.body.password,
-        idRole: idRoleUser,
+        idRole: idRoleUser._id,
       }
 
       const reponseUser = await UserService.postUser(newuser)
@@ -109,13 +110,13 @@ const postUser = async (req: Request, res: Response) => {
 const getUserByEmail = async (req: Request, res: Response) => {
   try {
     const userByEmail = await UserService.getUserByEmail(req.params.email)
-    if (userByEmail.length == 0) {
+    if (userByEmail == null) {
       res.status(400).send({ message: 'No existe el usuario en la base de datos' })
     } else {
       res.status(200).send({
-        name: userByEmail[0].name,
-        email: userByEmail[0].email,
-        password: userByEmail[0].password,
+        name: userByEmail.name,
+        email: userByEmail.email,
+        password: userByEmail.password,
       })
     }
   } catch (error) {
@@ -139,7 +140,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
 
 const updateUserByEmail = async (req: Request, res: Response) => {
   try {
-    const idRoleUser = await RoleService.getStandarRoleId()
+    const idRoleUser = await RoleService.getRoleId('user')
     const updatedUser: IUser = {
       name: req.body.name,
       lastname: req.body.lastname,
@@ -147,7 +148,7 @@ const updateUserByEmail = async (req: Request, res: Response) => {
       department: req.body.department,
       isActive: false,
       password: req.body.password,
-      idRole: idRoleUser,
+      idRole: idRoleUser._id,
     }
 
     const updateUserByEmail = await UserService.updateUserByEmail(req.body.email, updatedUser)
@@ -187,6 +188,28 @@ const deleteUserByEmail = async (req: Request, res: Response) => {
   }
 }
 
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const roleUser = await RoleService.getRoleId(req.body.nameRole)
+    const user = await UserService.getUserByEmail(req.body.email)
+    if (user != null) {
+      if (req.body.password == user.password && roleUser.nameRole == req.body.nameRole) {
+        const userResponse: IUserResponse = {
+          username: user.name,
+          email: user.email,
+        }
+        res.status(200).send(userResponse)
+      } else {
+        res.status(400).send({ message: 'Usuario incorrecto' })
+      }
+    } else {
+      res.status(400).send({ message: 'Error no existe el usuario' })
+    }
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
 const UserController = {
   getUsers,
   getUserById,
@@ -194,6 +217,7 @@ const UserController = {
   getUserByEmail,
   updateUserByEmail,
   deleteUserByEmail,
+  loginUser,
 }
 
 export default UserController
