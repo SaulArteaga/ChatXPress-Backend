@@ -1,14 +1,15 @@
 import { Types } from 'mongoose'
-import RoleDb from '../db/roles.db'
+import { role } from '../models/role'
 
 /**
- * This method call the calls the getStandarRoleId method
- * returns its result.
+ * This function finds and returns the id of
+ * the standard role of the users.
  * @returns a promise with the object id
  */
 
 const getStandarRoleId = async (): Promise<Types.ObjectId> => {
-  return await RoleDb.getStandarRoleId()
+  const standarRole = await role.find({ nameRole: 'user' })
+  return standarRole[0]._id
 }
 
 const RoleService = {
