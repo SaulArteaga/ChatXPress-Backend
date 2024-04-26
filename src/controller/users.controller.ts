@@ -3,6 +3,7 @@ import UserService from '../services/users.service'
 import { IUser } from '../interfaces/IUser'
 import RoleService from '../services/roles.service'
 import { IUserResponse } from '../interfaces/IUserResponse'
+import { tokenUtils } from '../utils/Token'
 
 /**
  * This function has to return the list of
@@ -198,6 +199,9 @@ const loginUser = async (req: Request, res: Response) => {
           username: user.name,
           email: user.email,
         }
+
+        tokenUtils.createToken(res, userResponse)
+
         res.status(200).send(userResponse)
       } else {
         res.status(400).send({ message: 'Usuario incorrecto' })
