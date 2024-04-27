@@ -24,7 +24,7 @@ const getUsers = async (_req: Request, res: Response) => {
     }
     res.status(200).send(users)
   } catch (error) {
-    res.status(500).send(error)
+    res.status(500).send({ message: 'server error' })
   }
 }
 
@@ -199,9 +199,7 @@ const loginUser = async (req: Request, res: Response) => {
           username: user.name,
           email: user.email,
         }
-
         tokenUtils.createToken(res, userResponse)
-
         res.status(200).send(userResponse)
       } else {
         res.status(400).send({ message: 'Usuario incorrecto' })

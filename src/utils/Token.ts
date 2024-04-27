@@ -2,7 +2,8 @@ import { Response } from 'express'
 import { IUserResponse } from '../interfaces/IUserResponse'
 import jwt from 'jsonwebtoken'
 
-const SECRET_KEY = 'gdlsEB3iGZEWPvk1a7Uu96P6NW6TgBbfqaS87mD4mF4'
+//const SECRET_KEY = 'hCGdEBacVjMoNKyq_WNmwqs6keON4x2ddHpylXiGma0'
+const SECRET_KEY = 'adminadmin'
 
 const createToken = (res: Response, user: IUserResponse) => {
   const payload = {
@@ -10,13 +11,11 @@ const createToken = (res: Response, user: IUserResponse) => {
     email: user.email,
   }
   const token = jwt.sign(payload, SECRET_KEY, {
-    expiresIn: '10m',
+    expiresIn: '3min',
   })
 
   res.cookie('jwt', token, {
     httpOnly: true,
-    sameSite: 'strict',
-    maxAge: 60 * 60 * 1000,
   })
 }
 
