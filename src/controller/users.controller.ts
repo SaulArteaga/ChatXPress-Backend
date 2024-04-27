@@ -4,6 +4,7 @@ import { IUser } from '../interfaces/IUser'
 import RoleService from '../services/roles.service'
 import { IUserResponse } from '../interfaces/IUserResponse'
 import { tokenUtils } from '../utils/Token'
+import { crypto } from '../utils/Crypto'
 
 /**
  * This function has to return the list of
@@ -74,13 +75,14 @@ const postUser = async (req: Request, res: Response) => {
     if (getEmail != null) {
       res.status(400).send({ message: 'Error ya existe ese usuario' })
     } else {
+      const hashedPassword = await crypto.hashPassword(req.body.password)
       const newuser: IUser = {
         name: req.body.name,
         lastname: req.body.lastname,
         email: req.body.email,
         department: req.body.department,
         isActive: false,
-        password: req.body.password,
+        password: hashedPassword,
         idRole: idRoleUser._id,
       }
 
@@ -194,7 +196,8 @@ const loginUser = async (req: Request, res: Response) => {
     const roleUser = await RoleService.getRoleId(req.body.nameRole)
     const user = await UserService.getUserByEmail(req.body.email)
     if (user != null) {
-      if (req.body.password == user.password && roleUser._id.toString() === user.idRole.toString()) {
+      const comparePassword = await crypto.comparePassword(req.body.password, user.password.toString())
+      if (comparePassword && roleUser._id.toString() === user.idRole.toString()) {
         const userResponse: IUserResponse = {
           username: user.name,
           email: user.email,

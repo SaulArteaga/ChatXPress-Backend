@@ -39,6 +39,9 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
+    "bcrypt-ts": "^5.0.2",
     "bson": "^6.6.0",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
