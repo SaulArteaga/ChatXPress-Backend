@@ -144,13 +144,14 @@ const getUserByEmail = async (req: Request, res: Response) => {
 const updateUserByEmail = async (req: Request, res: Response) => {
   try {
     const idRoleUser = await RoleService.getRoleId('user')
+    const hashedPassword = await crypto.hashPassword(req.body.password)
     const updatedUser: IUser = {
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
       department: req.body.department,
       isActive: false,
-      password: req.body.password,
+      password: hashedPassword,
       idRole: idRoleUser._id,
     }
 
