@@ -1,6 +1,7 @@
 import { user } from '../models/user'
 import { IUser } from '../interfaces/IUser'
 import mongoose from 'mongoose'
+import RoleService from './roles.service'
 
 /**
  * This function searches and returns all the users
@@ -9,7 +10,8 @@ import mongoose from 'mongoose'
  */
 
 const getUsers = async () => {
-  const users = await user.find()
+  const idRole = (await RoleService.getRoleId('user'))._id
+  const users = await user.find({ idRole: idRole })
   return users
 }
 
