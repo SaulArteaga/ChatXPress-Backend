@@ -68,7 +68,7 @@ const getUserById = async (req: Request, res: Response) => {
  * If the server fails, we return the error with a status of 500.
  */
 
-const postUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) => {
   try {
     const idRoleUser = await RoleService.getRoleId('user')
     const user = await UserService.getUserByEmail(req.body.email)
@@ -86,7 +86,7 @@ const postUser = async (req: Request, res: Response) => {
         idRole: idRoleUser._id,
       }
 
-      const resultCreateUser = await UserService.postUser(newuser)
+      const resultCreateUser = await UserService.createUser(newuser)
 
       if (!resultCreateUser) {
         res.status(400).send({ message: 'Error al introducir el nuevo usuario' })
@@ -217,7 +217,7 @@ const loginUser = async (req: Request, res: Response) => {
 const UserController = {
   getUsers,
   getUserById,
-  postUser,
+  createUser,
   getUserByEmail,
   updateUserByEmail,
   deleteUserByEmail,

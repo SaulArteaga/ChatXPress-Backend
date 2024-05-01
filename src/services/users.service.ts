@@ -34,7 +34,7 @@ const getUserById = async (id: string) => {
  * @returns If the user was added.
  */
 
-const postUser = async (newUser: IUser) => {
+const createUser = async (newUser: IUser) => {
   const _user = new user(newUser)
   const userStore = await _user.save()
   return userStore
@@ -80,7 +80,7 @@ const deleteUserByEmail = async (email: string) => {
 const UserService = {
   getUsers,
   getUserById,
-  postUser,
+  createUser,
   getUserByEmail,
   updateUserByEmail,
   deleteUserByEmail,

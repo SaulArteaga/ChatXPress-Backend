@@ -11,7 +11,7 @@ const UserRoutes = express.Router()
 
 UserRoutes.get('/users', UserController.getUsers)
 UserRoutes.get('/user/id/:id', UserController.getUserById)
-UserRoutes.post('/user', UserController.postUser)
+UserRoutes.post('/user', UserController.createUser)
 UserRoutes.get('/user/:email', UserController.getUserByEmail)
 UserRoutes.put('/user/:email', UserController.updateUserByEmail)
 UserRoutes.delete('/user/:email', UserController.deleteUserByEmail)
