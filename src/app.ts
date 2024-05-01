@@ -1,6 +1,7 @@
 import express from 'express'
 import UsersRoutes from './routes/users.routes'
 import MessageRoutes from './routes/messages.routes'
+import ChatRoutes from './routes/chats.routes'
 
 const app = express()
 app.use(express.json())
@@ -25,5 +26,6 @@ app.get('/hello', (_req, res) => {
 
 app.use('/api/v1', UsersRoutes)
 app.use('/api/v1', MessageRoutes)
+app.use('/api/v1', ChatRoutes)
 
 export default app

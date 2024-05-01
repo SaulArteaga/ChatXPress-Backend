@@ -7,11 +7,6 @@ import { IChat } from '../interfaces/IChat'
  */
 
 const chatSchema = new Schema<IChat>({
-  _id: {
-    type: Schema.Types.ObjectId,
-    require: true,
-    unique: true,
-  },
   idUsers: {
     type: [{ type: Schema.ObjectId, ref: 'user' }],
     require: true,
