@@ -200,6 +200,7 @@ const loginUser = async (req: Request, res: Response) => {
       const comparePassword = await crypto.comparePassword(req.body.password, user.password.toString())
       if (comparePassword && roleUser._id.toString() === user.idRole.toString()) {
         const userResponse: IUserResponse = {
+          id: user._id.toString(),
           username: user.name,
           email: user.email,
         }
