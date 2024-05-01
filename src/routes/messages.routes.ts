@@ -3,6 +3,7 @@ import MessageController from '../controller/messages.controller'
 
 const MessageRoutes = express.Router()
 
-MessageRoutes.get('/total/messages', MessageController.getTotalMessages)
+MessageRoutes.get('/message/total', MessageController.getTotalMessages)
+MessageRoutes.get('/message/:id', MessageController.getMessageById)
 
 export default MessageRoutes
