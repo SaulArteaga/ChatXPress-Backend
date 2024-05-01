@@ -71,8 +71,8 @@ const getUserById = async (req: Request, res: Response) => {
 const postUser = async (req: Request, res: Response) => {
   try {
     const idRoleUser = await RoleService.getRoleId('user')
-    const getEmail = await UserService.getUserByEmail(req.body.email)
-    if (getEmail != null) {
+    const user = await UserService.getUserByEmail(req.body.email)
+    if (user != null) {
       res.status(400).send({ message: 'Error ya existe ese usuario' })
     } else {
       const hashedPassword = await crypto.hashPassword(req.body.password)
@@ -86,9 +86,9 @@ const postUser = async (req: Request, res: Response) => {
         idRole: idRoleUser._id,
       }
 
-      const reponseUser = await UserService.postUser(newuser)
+      const resultCreateUser = await UserService.postUser(newuser)
 
-      if (!reponseUser) {
+      if (!resultCreateUser) {
         res.status(400).send({ message: 'Error al introducir el nuevo usuario' })
       }
       res.status(200).send({ message: 'Nuevo usuario introducido correctamente' })
@@ -112,11 +112,11 @@ const postUser = async (req: Request, res: Response) => {
 
 const getUserByEmail = async (req: Request, res: Response) => {
   try {
-    const userByEmail = await UserService.getUserByEmail(req.params.email)
-    if (userByEmail == null) {
+    const user = await UserService.getUserByEmail(req.params.email)
+    if (user == null) {
       res.status(400).send({ message: 'No existe el usuario en la base de datos' })
     } else {
-      res.status(200).send(userByEmail)
+      res.status(200).send(user)
     }
   } catch (error) {
     res.status(500).send(error)
@@ -151,8 +151,8 @@ const updateUserByEmail = async (req: Request, res: Response) => {
       idRole: idRoleUser._id,
     }
 
-    const updateUserByEmail = await UserService.updateUserByEmail(req.body.email, updatedUser)
-    if (!updateUserByEmail) {
+    const resultUpdateUser = await UserService.updateUserByEmail(req.params.email, updatedUser)
+    if (resultUpdateUser.modifiedCount == 0) {
       res.status(400).send({ message: 'No existe usuario en la base de datos' })
     } else {
       res.status(200).send({ message: 'Usuario actualizado correctamente' })
@@ -177,8 +177,8 @@ const updateUserByEmail = async (req: Request, res: Response) => {
 
 const deleteUserByEmail = async (req: Request, res: Response) => {
   try {
-    const deleteUserByEmail = await UserService.deleteUserByEmail(req.params.email)
-    if (!deleteUserByEmail) {
+    const resultDeleteUser = await UserService.deleteUserByEmail(req.params.email)
+    if (resultDeleteUser.deletedCount == 0) {
       res.status(400).send({ message: 'No existe usuario en la base de datos' })
     } else {
       res.status(200).send({ message: 'Usuario eliminado correctamente' })
