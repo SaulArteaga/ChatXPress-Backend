@@ -203,8 +203,9 @@ const loginUser = async (req: Request, res: Response) => {
           username: user.name,
           email: user.email,
         }
-        tokenUtils.createToken(res, userResponse)
-        res.status(200).send(userResponse)
+        const token = tokenUtils.createToken(userResponse)
+
+        res.status(200).cookie('jwt', token, tokenUtils.accessTokenCookieOptions).send(userResponse)
       } else {
         res.status(400).send({ message: 'Usuario incorrecto' })
       }
