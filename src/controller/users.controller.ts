@@ -116,11 +116,7 @@ const getUserByEmail = async (req: Request, res: Response) => {
     if (userByEmail == null) {
       res.status(400).send({ message: 'No existe el usuario en la base de datos' })
     } else {
-      res.status(200).send({
-        name: userByEmail.name,
-        email: userByEmail.email,
-        password: userByEmail.password,
-      })
+      res.status(200).send(userByEmail)
     }
   } catch (error) {
     res.status(500).send(error)
