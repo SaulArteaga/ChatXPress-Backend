@@ -7,11 +7,6 @@ import { IMessage } from '../interfaces/IMessage'
  */
 
 const messageSchema = new Schema<IMessage>({
-  _id: {
-    type: Schema.Types.ObjectId,
-    require: true,
-    unique: true,
-  },
   content: {
     type: String,
     require: true,

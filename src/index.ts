@@ -8,10 +8,10 @@ import { connect } from './db/database'
 
 connect()
   .then(() => {
-    console.log('El servidor se inicio')
+    console.log('conexión exitosa a la base de datos')
   })
   .catch(() => {
-    console.log('No se puede conectar con el servidor')
+    console.log('No se puede conectar con la base de datos')
   })
 
 /**
