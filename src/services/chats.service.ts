@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import { chat } from '../models/chat'
+import { IChat } from '../interfaces/IChat'
 const getChatsFromUser = async (id: string) => {
   const idUser = new mongoose.Types.ObjectId(id)
   const chats = await chat.find({ idUsers: idUser })
@@ -17,10 +18,17 @@ const getChatByIdUsers = async (idUser: string, idGuestUser: string) => {
   return dbchat
 }
 
+const createNewChat = async (newchat: IChat) => {
+  const _chat = new chat(newchat)
+  const chatStore = await _chat.save()
+  return chatStore
+}
+
 const ChatService = {
   getChatsFromUser,
   retrieveAllMessageFromChat,
   getChatByIdUsers,
+  createNewChat,
 }
 
 export default ChatService

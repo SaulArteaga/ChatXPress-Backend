@@ -4,6 +4,7 @@ import { IchatsResponse } from '../interfaces/IChatsResponse'
 import ChatFormatter from '../utils/ChatFormatter'
 import { ICurrentChatRespose } from '../interfaces/ICurrentChatResponse'
 import UserService from '../services/users.service'
+import { IChat } from '../interfaces/IChat'
 
 const getChatsFromUser = async (req: Request, res: Response) => {
   try {
@@ -71,10 +72,40 @@ const getChatByIdUsers = async (req: Request, res: Response) => {
   }
 }
 
+const createNewChat = async (req: Request, res: Response) => {
+  try {
+    const { idUser, emailGuestUser } = req.body
+
+    if (!idUser || !emailGuestUser) {
+      res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
+    } else {
+      const guestUser = await UserService.getUserByEmail(emailGuestUser)
+      const currentUser = await UserService.getUserById(idUser)
+
+      if (guestUser && currentUser) {
+        const newChat: IChat = {
+          idUsers: [currentUser._id, guestUser._id],
+          idMessages: [],
+        }
+
+        const resultChatSaved = await ChatService.createNewChat(newChat)
+        if (resultChatSaved) {
+          res.status(400).send({ message: 'Error al introducir el nuevo chat' })
+        } else {
+          res.status(200).send({ message: 'Nuevo chat creado correctamente' })
+        }
+      }
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'server error' })
+  }
+}
+
 const ChatsController = {
   getChatsFromUser,
   retrieveAllMessageFromChat,
   getChatByIdUsers,
+  createNewChat,
 }
 
 export default ChatsController
