@@ -24,11 +24,17 @@ const createNewChat = async (newchat: IChat) => {
   return chatStore
 }
 
+const updateCurrentChat = async (idChat: string, chatModified: IChat) => {
+  const isUpdated = await chat.findByIdAndUpdate(idChat, chatModified)
+  return isUpdated
+}
+
 const ChatService = {
   getChatsFromUser,
   retrieveAllMessageFromChat,
   getChatByIdUsers,
   createNewChat,
+  updateCurrentChat,
 }
 
 export default ChatService

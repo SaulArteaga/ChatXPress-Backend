@@ -5,6 +5,7 @@ import ChatFormatter from '../utils/ChatFormatter'
 import { ICurrentChatRespose } from '../interfaces/ICurrentChatResponse'
 import UserService from '../services/users.service'
 import { IChat } from '../interfaces/IChat'
+import MessageService from '../services/messages.service'
 
 const getChatsFromUser = async (req: Request, res: Response) => {
   try {
@@ -47,7 +48,6 @@ const retrieveAllMessageFromChat = async (req: Request, res: Response) => {
 const getChatByIdUsers = async (req: Request, res: Response) => {
   try {
     const { idUser, emailGuestUser } = req.body
-
     if (!idUser || !emailGuestUser) {
       res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
     } else {
@@ -101,11 +101,41 @@ const createNewChat = async (req: Request, res: Response) => {
   }
 }
 
+const updateCurrentChat = async (req: Request, res: Response) => {
+  try {
+    const { idMessage } = req.body
+
+    if (!idMessage) {
+      res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
+    } else {
+      const currentMessage = await MessageService.getMessageById(idMessage)
+
+      if (!currentMessage) {
+        res.status(400).send({ message: 'El mensaje no existe en la base de datos' })
+      } else {
+        const currentChat = await ChatService.retrieveAllMessageFromChat(req.params.id)
+        if (currentChat) {
+          currentChat.idMessages.push(currentMessage._id)
+          const resultChatUpdated = await ChatService.updateCurrentChat(req.params.id, currentChat)
+          if (!resultChatUpdated) {
+            res.status(400).send({ message: 'No se ha modificado correctamente en la base de datos' })
+          } else {
+            res.status(200).send({ message: 'Chat actualizado correctamente' })
+          }
+        }
+      }
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'server error' })
+  }
+}
+
 const ChatsController = {
   getChatsFromUser,
   retrieveAllMessageFromChat,
   getChatByIdUsers,
   createNewChat,
+  updateCurrentChat,
 }
 
 export default ChatsController

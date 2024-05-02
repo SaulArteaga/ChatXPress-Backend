@@ -5,6 +5,8 @@ const ChatRoutes = express.Router()
 
 ChatRoutes.get('/chats/user/:id', ChatsController.getChatsFromUser)
 ChatRoutes.post('/chat/:id', ChatsController.retrieveAllMessageFromChat)
-ChatRoutes.post('/chat', ChatsController.getChatByIdUsers)
+ChatRoutes.post('/chat/users', ChatsController.getChatByIdUsers)
+ChatRoutes.post('/newchat', ChatsController.createNewChat)
+ChatRoutes.put('/chat/:id', ChatsController.updateCurrentChat)
 
 export default ChatRoutes
