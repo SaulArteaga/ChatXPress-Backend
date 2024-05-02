@@ -3,8 +3,11 @@ import { IchatResult } from '../interfaces/IChatResult'
 import { IchatsResponse } from '../interfaces/IChatsResponse'
 import MessageService from '../services/messages.service'
 import UserService from '../services/users.service'
+import { ICurrentChatRespose } from '../interfaces/ICurrentChatResponse'
+import { IMessageResponse } from '../interfaces/IMessageResponse'
+import MessageFormatter from './MessageFormatter'
 
-const getChatsFormatted = async (resultChats: IchatResult[], id: string) => {
+const getChatsFromUserFormatted = async (resultChats: IchatResult[], id: string) => {
   const chatFormated: IchatsResponse[] = await Promise.all(
     resultChats.map(async (chat: IchatResult) => {
       const newChat: IchatsResponse = {
@@ -34,6 +37,20 @@ const getChatsFormatted = async (resultChats: IchatResult[], id: string) => {
   return chatFormated
 }
 
+const getCurrentChatFormatted = async (chat: IchatResult, name: string): Promise<ICurrentChatRespose> => {
+  const currentChatFormatted: ICurrentChatRespose = {
+    idChat: chat._id.toString(),
+    name: name,
+    messages: [],
+  }
+
+  const allChatMessages: IMessageResponse[] = await MessageFormatter.getAllMessagesFormatted(chat)
+
+  currentChatFormatted.messages = allChatMessages
+
+  return currentChatFormatted
+}
+
 const getIdGuestUser = (chat: IchatResult, id: string): string => {
   return chat.idUsers.filter((idUser: Types.ObjectId) => idUser.toString() != id)[0].toString()
 }
@@ -43,7 +60,8 @@ const getIdLastMessage = (chat: IchatResult): string => {
 }
 
 const ChatFormatter = {
-  getChatsFormatted,
+  getChatsFromUserFormatted,
+  getCurrentChatFormatted,
 }
 
 export default ChatFormatter

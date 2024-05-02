@@ -4,6 +4,7 @@ import ChatsController from '../controller/chats.controller'
 const ChatRoutes = express.Router()
 
 ChatRoutes.get('/chats/user/:id', ChatsController.getChatsFromUser)
-ChatRoutes.get('/chats/:id', ChatsController.retrieveAllMessageFromChat)
+ChatRoutes.post('/chat/:id', ChatsController.retrieveAllMessageFromChat)
+ChatRoutes.post('/chat', ChatsController.getChatByIdUsers)
 
 export default ChatRoutes
