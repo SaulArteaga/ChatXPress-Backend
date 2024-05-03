@@ -13,8 +13,7 @@ const retrieveAllMessageFromChat = async (id: string) => {
 }
 
 const getChatByIdUsers = async (idUser: string, idGuestUser: string) => {
-  const idUsers = [idUser, idGuestUser]
-  const dbchat = await chat.find({ idUsers: idUsers })
+  const dbchat = await chat.findOne({ $and: [{ idUsers: idUser }, { idUsers: idGuestUser }] })
   return dbchat
 }
 

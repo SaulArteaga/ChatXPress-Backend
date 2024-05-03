@@ -44,9 +44,10 @@ const getCurrentChatFormatted = async (chat: IchatResult, name: string): Promise
     messages: [],
   }
 
-  const allChatMessages: IMessageResponse[] = await MessageFormatter.getAllMessagesFormatted(chat)
-
-  currentChatFormatted.messages = allChatMessages
+  if (chat.idMessages.length != 0) {
+    const allChatMessages: IMessageResponse[] = await MessageFormatter.getAllMessagesFormatted(chat)
+    currentChatFormatted.messages = allChatMessages
+  }
 
   return currentChatFormatted
 }
