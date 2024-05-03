@@ -16,6 +16,7 @@ const getChatsFromUserFormatted = async (resultChats: IchatResult[], id: string)
         lastMessage: '',
         time: '',
       }
+
       const idGuestUser = getIdGuestUser(chat, id)
       const guestUser = await UserService.getUserById(idGuestUser)
 
@@ -23,12 +24,14 @@ const getChatsFromUserFormatted = async (resultChats: IchatResult[], id: string)
         newChat.nameGuestUser = guestUser.name
       }
 
-      const idLastMessage = getIdLastMessage(chat)
-      const lastMessage = await MessageService.getMessageById(idLastMessage)
+      if (chat.idMessages.length != 0) {
+        const idLastMessage = getIdLastMessage(chat)
+        const lastMessage = await MessageService.getMessageById(idLastMessage)
 
-      if (lastMessage) {
-        newChat.lastMessage = lastMessage.content
-        newChat.time = lastMessage.dateCreated.toString()
+        if (lastMessage) {
+          newChat.lastMessage = lastMessage.content
+          newChat.time = lastMessage.dateCreated.toString()
+        }
       }
 
       return newChat
