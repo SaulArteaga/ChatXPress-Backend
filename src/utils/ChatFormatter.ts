@@ -15,9 +15,11 @@ const getChatsFromUserFormatted = async (resultChats: IchatResult[], id: string)
         nameGuestUser: '',
         lastMessage: '',
         time: '',
+        idGuestUser: '',
       }
 
       const idGuestUser = getIdGuestUser(chat, id)
+      newChat.idGuestUser = idGuestUser
       const guestUser = await UserService.getUserById(idGuestUser)
 
       if (guestUser) {
