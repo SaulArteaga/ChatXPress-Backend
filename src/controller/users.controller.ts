@@ -202,7 +202,7 @@ const loginUser = async (req: Request, res: Response) => {
         }
         const token = tokenUtils.createToken(userResponse)
 
-        res.status(200).cookie('jwt', token, tokenUtils.accessTokenCookieOptions).send(userResponse)
+        res.status(200).send({ ...userResponse, token })
       } else {
         res.status(400).send({ message: 'Usuario incorrecto' })
       }
