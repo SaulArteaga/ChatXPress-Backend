@@ -18,7 +18,7 @@ const getChatsFromUser = async (req: Request, res: Response) => {
     }
     const chatsFromUserFormatted: IchatsResponse[] = await ChatFormatter.getChatsFromUserFormatted(
       chatsObtained,
-      req.params.id,
+      req.params.iduser,
     )
 
     return res.status(200).send(chatsFromUserFormatted)
@@ -62,64 +62,6 @@ const retrieveAllMessageFromChat = async (req: Request, res: Response) => {
   }
 }
 
-// const getChatByIdUsers = async (req: Request, res: Response) => {
-//   try {
-//     const { idUser, emailGuestUser } = req.body
-//     if (!idUser || !emailGuestUser) {
-//       res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
-//     } else {
-//       const guestUser = await UserService.getUserByEmail(emailGuestUser)
-
-//       if (guestUser) {
-//         const chat = await ChatService.getChatByIdUsers(idUser, guestUser._id.toString())
-//         if (chat.length == 0) {
-//           res.status(400).send({ message: 'El chat no existe en la base de datos' })
-//         } else {
-//           res.status(200).send({
-//             idChat: chat[0]._id,
-//             nameGuestUser: guestUser.name,
-//           })
-//         }
-//       } else {
-//         res.status(400).send({ message: 'El email enviado no existe' })
-//       }
-//     }
-//   } catch (error) {
-//     res.status(500).send({ message: 'server error' })
-//   }
-// }
-
-// const createNewChat = async (req: Request, res: Response) => {
-//   try {
-//     const { idUser, emailGuestUser } = req.body
-
-//     if (!idUser || !emailGuestUser) {
-//       res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
-//     } else {
-//       const guestUser = await UserService.getUserByEmail(emailGuestUser)
-//       const currentUser = await UserService.getUserById(idUser)
-
-//       if (guestUser && currentUser) {
-//         const newChat: IChat = {
-//           idUsers: [currentUser._id, guestUser._id],
-//           idMessages: [],
-//         }
-
-//         const resultChatSaved = await ChatService.createNewChat(newChat)
-//         if (resultChatSaved) {
-//           res.status(400).send({ message: 'Error al introducir el nuevo chat' })
-//         } else {
-//           res.status(200).send({ message: 'Nuevo chat creado correctamente' })
-//         }
-//       } else {
-//         res.status(400).send({ message: 'No existen los usuarios enviados' })
-//       }
-//     }
-//   } catch (error) {
-//     res.status(500).send({ message: 'server error' })
-//   }
-// }
-
 const updateCurrentChat = async (req: Request, res: Response) => {
   try {
     const { idMessage } = req.body
@@ -156,13 +98,3 @@ const ChatsController = {
 }
 
 export default ChatsController
-
-// Id del usuario logueado y el email del usuario invitado
-
-// Comprobar que el email es del usuario invitado y no el tuyo
-
-// Comprobar si existe un chat con esos dos usuarios
-
-// Si existe devolverlo con todos los mensajes
-
-// Si no se crea y devuelve uno nuevo sin ningun mensaje escrito
