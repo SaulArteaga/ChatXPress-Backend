@@ -39,10 +39,7 @@ const createMessage = async (req: Request, res: Response) => {
     if (!resultCreateMessage) {
       res.status(400).send({ message: 'Error al introducir un nuevo mensaje' })
     }
-    res.status(200).send({
-      message: 'Nuevo mensaje introducido correctamente',
-      idMessage: resultCreateMessage._id.toString(),
-    })
+    res.status(200).send(resultCreateMessage)
   } catch (error) {
     res.status(500).send({ message: 'server error' })
   }

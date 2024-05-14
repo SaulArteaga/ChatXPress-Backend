@@ -11,7 +11,6 @@ import { IchatResult } from '../interfaces/IChatResult'
 const getChatsFromUser = async (req: Request, res: Response) => {
   try {
     const chatsObtained = await ChatService.getChatsFromUser(req.params.iduser)
-    console.log(chatsObtained)
 
     if (chatsObtained.length == 0) {
       return res.status(400).send({ message: 'No hay ningun chat en la base de datos' })
@@ -36,7 +35,6 @@ const retrieveAllMessageFromChat = async (req: Request, res: Response) => {
     }
 
     const chat = await ChatService.getChatByIdUsers(idGuestUser, idUser)
-    console.log(chat)
     if (!chat) {
       const objectIdUser = new mongoose.Types.ObjectId(idGuestUser)
       const objectIdGuestUser = new mongoose.Types.ObjectId(idUser)
