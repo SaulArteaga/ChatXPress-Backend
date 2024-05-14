@@ -18,7 +18,7 @@ const messageSchema = new Schema<IMessage>({
     ref: 'user',
   },
   dateCreated: {
-    type: Date,
+    type: String,
     require: true,
   },
 })

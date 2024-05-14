@@ -7,5 +7,5 @@ import { Types } from 'mongoose'
 export interface IMessage {
   content: String
   idUser: Types.ObjectId
-  dateCreated: Date
+  dateCreated: String
 }

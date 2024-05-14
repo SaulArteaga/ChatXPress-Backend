@@ -28,11 +28,13 @@ const getMessageById = async (req: Request, res: Response) => {
   }
 }
 const createMessage = async (req: Request, res: Response) => {
+  const d = new Date()
+  const date = `${d.getDay()}-${d.getMonth()}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
   try {
     const newMessage: IMessage = {
       content: req.body.content,
       idUser: req.body.idUser,
-      dateCreated: new Date(),
+      dateCreated: date,
     }
     const resultCreateMessage = await MessageService.createMessage(newMessage)
 
