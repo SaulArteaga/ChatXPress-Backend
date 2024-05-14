@@ -39,9 +39,7 @@ const getChatsFromUserFormatted = async (resultChats: IchatResult[], id: string)
       return newChat
     }),
   )
-  return chatFormated.filter((chat: IchatsResponse) => {
-    chat.lastMessage !== ''
-  })
+  return chatFormated.filter((chat: IchatsResponse) => chat.lastMessage !== '')
 }
 
 const getCurrentChatFormatted = async (chat: IchatResult, name: string): Promise<ICurrentChatRespose> => {
