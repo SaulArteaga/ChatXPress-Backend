@@ -213,6 +213,16 @@ const loginUser = async (req: Request, res: Response) => {
           email: user.email,
         }
         const token = tokenUtils.createToken(userResponse)
+        const updatedUser: IUser = {
+          name: user.name,
+          lastname: user.lastname,
+          email: user.email,
+          department: user.department,
+          isActive: true,
+          password: user.password,
+          idRole: user.idRole,
+        }
+        await UserService.updateUserByEmail(req.body.email, updatedUser)
 
         res.status(200).send({ ...userResponse, token })
       } else {
