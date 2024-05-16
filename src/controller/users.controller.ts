@@ -29,6 +29,18 @@ const getUsers = async (_req: Request, res: Response) => {
   }
 }
 
+const getTotalUsers = async (_req: Request, res: Response) => {
+  const totalUsers = await UserService.getTotalUsers()
+  try {
+    if (!totalUsers) {
+      res.status(400).send({ message: 'No existen usuarios en la base de datos' })
+    }
+    res.status(200).send(totalUsers)
+  } catch (error) {
+    res.status(500).send({ message: 'Server error' })
+  }
+}
+
 /**
  * This function has to return a user by the id we specify
  * in the url at a given endpoint (/api/v1/user/:id).
@@ -222,6 +234,7 @@ const UserController = {
   updateUserByEmail,
   deleteUserByEmail,
   loginUser,
+  getTotalUsers,
 }
 
 export default UserController

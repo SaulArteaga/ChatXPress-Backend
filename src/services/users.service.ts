@@ -52,6 +52,11 @@ const getUserByEmail = async (email: string) => {
   return userByEmail[0]
 }
 
+const getTotalUsers = async () => {
+  const totalUsers = await user.find().countDocuments()
+  return { totalUsers }
+}
+
 /**
  * This function updates a user by receiving his email
  * as a parameter and the data we want to modify.
@@ -82,6 +87,7 @@ const UserService = {
   getUserById,
   createUser,
   getUserByEmail,
+  getTotalUsers,
   updateUserByEmail,
   deleteUserByEmail,
 }

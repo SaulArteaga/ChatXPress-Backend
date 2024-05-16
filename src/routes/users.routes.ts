@@ -16,5 +16,6 @@ UserRoutes.get('/user/:email', auth.ensureAuth, UserController.getUserByEmail)
 UserRoutes.put('/user/:email', auth.ensureAuth, UserController.updateUserByEmail)
 UserRoutes.delete('/user/:email', auth.ensureAuth, UserController.deleteUserByEmail)
 UserRoutes.post('/user/login', UserController.loginUser)
+UserRoutes.get('/users/total', UserController.getTotalUsers)
 
 export default UserRoutes
