@@ -34,8 +34,9 @@ const getTotalUsers = async (_req: Request, res: Response) => {
   try {
     if (!totalUsers) {
       res.status(400).send({ message: 'No existen usuarios en la base de datos' })
+    } else {
+      res.status(200).send(totalUsers)
     }
-    res.status(200).send(totalUsers)
   } catch (error) {
     res.status(500).send({ message: 'Server error' })
   }
@@ -140,8 +141,9 @@ const getActiveUsers = async (_req: Request, res: Response) => {
   try {
     if (!activeUsers) {
       res.status(400).send({ message: 'No existen usuarios en la base de datos' })
+    } else {
+      res.status(200).send(activeUsers)
     }
-    res.status(200).send(activeUsers)
   } catch (error) {
     res.status(500).send({ message: 'Server error' })
   }
@@ -248,6 +250,29 @@ const loginUser = async (req: Request, res: Response) => {
   }
 }
 
+const logoutUser = async (req: Request, res: Response) => {
+  try {
+    const user = await UserService.getUserByEmail(req.body.email)
+    const updatedUser: IUser = {
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      department: user.department,
+      isActive: false,
+      password: user.password,
+      idRole: user.idRole,
+    }
+    const update = await UserService.updateUserByEmail(req.body.email, updatedUser)
+    if (update.modifiedCount != 0) {
+      res.status(200).send({ message: 'Usuario deslogeado' })
+    } else {
+      res.status(400).send({ message: 'No se ha podido deslogear' })
+    }
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
 const UserController = {
   getUsers,
   getUserById,
@@ -258,6 +283,7 @@ const UserController = {
   loginUser,
   getTotalUsers,
   getActiveUsers,
+  logoutUser,
 }
 
 export default UserController
