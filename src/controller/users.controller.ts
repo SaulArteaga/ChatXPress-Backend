@@ -135,6 +135,18 @@ const getUserByEmail = async (req: Request, res: Response) => {
   }
 }
 
+const getActiveUsers = async (_req: Request, res: Response) => {
+  const activeUsers = await UserService.getActiveUsers()
+  try {
+    if (!activeUsers) {
+      res.status(400).send({ message: 'No existen usuarios en la base de datos' })
+    }
+    res.status(200).send(activeUsers)
+  } catch (error) {
+    res.status(500).send({ message: 'Server error' })
+  }
+}
+
 /**
  * This function must modify a user with an email passed by the url
  * and using the data provided in the body, at a given endpoint
@@ -245,6 +257,7 @@ const UserController = {
   deleteUserByEmail,
   loginUser,
   getTotalUsers,
+  getActiveUsers,
 }
 
 export default UserController

@@ -57,6 +57,11 @@ const getTotalUsers = async () => {
   return { totalUsers }
 }
 
+const getActiveUsers = async () => {
+  const activeUsers = await user.find({ isActive: true })
+  return activeUsers
+}
+
 /**
  * This function updates a user by receiving his email
  * as a parameter and the data we want to modify.
@@ -88,6 +93,7 @@ const UserService = {
   createUser,
   getUserByEmail,
   getTotalUsers,
+  getActiveUsers,
   updateUserByEmail,
   deleteUserByEmail,
 }

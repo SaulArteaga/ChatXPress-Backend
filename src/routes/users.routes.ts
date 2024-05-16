@@ -11,11 +11,12 @@ const UserRoutes = express.Router()
 
 UserRoutes.get('/users', auth.ensureAuth, UserController.getUsers)
 UserRoutes.get('/user/id/:id', auth.ensureAuth, UserController.getUserById)
+UserRoutes.get('/users/total', auth.ensureAuth, UserController.getTotalUsers)
+UserRoutes.get('/users/active', auth.ensureAuth, UserController.getActiveUsers)
 UserRoutes.post('/user', auth.ensureAuth, UserController.createUser)
 UserRoutes.get('/user/:email', auth.ensureAuth, UserController.getUserByEmail)
 UserRoutes.put('/user/:email', auth.ensureAuth, UserController.updateUserByEmail)
 UserRoutes.delete('/user/:email', auth.ensureAuth, UserController.deleteUserByEmail)
 UserRoutes.post('/user/login', UserController.loginUser)
-UserRoutes.get('/users/total', UserController.getTotalUsers)
 
 export default UserRoutes
