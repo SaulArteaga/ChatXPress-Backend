@@ -89,10 +89,24 @@ const updateCurrentChat = async (req: Request, res: Response) => {
   }
 }
 
+const getChatCount = async (_req: Request, res: Response) => {
+  try {
+    const chatCount = await ChatService.getChatsCount()
+    if (!chatCount) {
+      res.status(400).send({ message: 'No existen usuarios en la base de datos' })
+    }
+    res.status(200).send(chatCount)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ message: 'Server error' })
+  }
+}
+
 const ChatsController = {
   getChatsFromUser,
   retrieveAllMessageFromChat,
   updateCurrentChat,
+  getChatCount,
 }
 
 export default ChatsController

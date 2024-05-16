@@ -17,6 +17,11 @@ const getChatByIdUsers = async (idUser: string, idGuestUser: string) => {
   return dbchat
 }
 
+const getChatsCount = async () => {
+  const chatsActive = await chat.find().countDocuments()
+  return { chatsActive }
+}
+
 const createNewChat = async (newchat: IChat) => {
   const _chat = new chat(newchat)
   const chatStore = await _chat.save()
@@ -34,6 +39,7 @@ const ChatService = {
   getChatByIdUsers,
   createNewChat,
   updateCurrentChat,
+  getChatsCount,
 }
 
 export default ChatService
