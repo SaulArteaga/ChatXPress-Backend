@@ -58,8 +58,8 @@ const getTotalUsers = async () => {
 }
 
 const getActiveUsers = async () => {
-  const activeUsers = await user.find({ isActive: true })
-  return activeUsers
+  const activeUsers = await user.find({ isActive: true }).countDocuments()
+  return { activeUsers }
 }
 
 /**
