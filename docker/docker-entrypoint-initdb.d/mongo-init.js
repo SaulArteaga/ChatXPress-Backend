@@ -62,7 +62,7 @@ message_three = ObjectId()
 message_four = ObjectId()
 message_five = ObjectId()
 
-var date = '12-30-2023 12:40:29'
+var date = '12/30/2023 12:40:29'
 
 db.messages.insertMany([
   {
