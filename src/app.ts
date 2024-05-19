@@ -4,7 +4,7 @@ import MessageRoutes from './routes/messages.routes'
 import ChatRoutes from './routes/chats.routes'
 import http from 'http'
 import { Server, Socket } from 'socket.io'
-import { IMessageResponse } from './interfaces/IMessageResponse'
+import { ISockedRecieved } from './interfaces/ISockedRecieved'
 
 const app = express()
 const server = http.createServer(app)
@@ -51,12 +51,12 @@ io.on('connection', (socket: Socket) => {
     console.log(socket.rooms)
   })
 
-  socket.on('emitMessage', (message: IMessageResponse) => {
-    console.log('mensaje', message)
+  socket.on('emitMessage', (data: ISockedRecieved) => {
+    const { message } = data
     const room = Array.from(socket.rooms).filter((it) => it !== socket.id)[0]
-
-    socket.to(room).emit('onMessage', message)
+    socket.to(room).emit('emitMessage', message)
   })
+
   socket.on('disconnect', () => {
     socket.removeAllListeners()
   })
