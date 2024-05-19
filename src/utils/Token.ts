@@ -21,4 +21,8 @@ const decodeToken = (token: any) => {
   return jwt.decode(token)
 }
 
-export const tokenUtils = { createToken, decodeToken, accessTokenCookieOptions }
+const verifyToken = (token: any) => {
+  return jwt.verify(token, SECRET_KEY)
+}
+
+export const tokenUtils = { createToken, decodeToken, verifyToken, accessTokenCookieOptions }
