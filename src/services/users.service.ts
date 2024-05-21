@@ -52,11 +52,21 @@ const getUserByEmail = async (email: string) => {
   return userByEmail[0]
 }
 
+/**
+ * This function returns an object that contains
+ * the count of the users in the database.
+ * @returns The count of all users in the database
+ */
 const getTotalUsers = async () => {
   const totalUsers = await user.find().countDocuments()
   return { totalUsers }
 }
 
+/**
+ * This function returns an object that contains
+ * the count of all the active users in the database.
+ * @returns The count of the active users in the database.
+ */
 const getActiveUsers = async () => {
   const activeUsers = await user.find({ isActive: true }).countDocuments()
   return { activeUsers }
