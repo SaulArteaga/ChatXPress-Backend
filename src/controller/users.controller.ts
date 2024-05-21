@@ -29,6 +29,13 @@ const getUsers = async (_req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function returns a count of all users in the database
+ * @param _req
+ * @param res
+ * @returns An object with the count of all the users in the database.
+ * If theres no users we send an object with an error message.
+ */
 const getTotalUsers = async (_req: Request, res: Response) => {
   const totalUsers = await UserService.getTotalUsers()
   try {
@@ -136,6 +143,13 @@ const getUserByEmail = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function returns a count of all active users in the database
+ * @param _req
+ * @param res
+ * @returns An object with the count of all the active users in the database.
+ * If theres no active users we send an object with an error message.
+ */
 const getActiveUsers = async (_req: Request, res: Response) => {
   const activeUsers = await UserService.getActiveUsers()
   try {
@@ -214,6 +228,17 @@ const deleteUserByEmail = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function logs an user into the application. For that it
+ * compares the passwords on the database and the password parsed through params.
+ * @param req
+ * @param res
+ * @returns
+ * If the comparation is successfull, it returns the userResponse with status 200.
+ * If the password is incorrect returns an error with status 400.
+ * If the user doesn't exist it returns an error with status 400.
+ * If the server doesn't respond, it returns an error with status 500.
+ */
 const loginUser = async (req: Request, res: Response) => {
   try {
     const roleUser = await RoleService.getRoleId(req.body.nameRole)
@@ -250,6 +275,16 @@ const loginUser = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function logout an user from the application. And it
+ * sets the state of isActive to false.
+ * @param req
+ * @param res
+ * @returns
+ * If it is successfull, it returns a message with status 200.
+ * If something is incorrect it returns an error with status 400.
+ * If the server doesn't respond, it returns an error with status 500.
+ */
 const logoutUser = async (req: Request, res: Response) => {
   try {
     const user = await UserService.getUserByEmail(req.body.email)

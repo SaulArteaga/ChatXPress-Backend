@@ -8,6 +8,13 @@ import MessageService from '../services/messages.service'
 import mongoose from 'mongoose'
 import { IchatResult } from '../interfaces/IChatResult'
 
+/**
+ * This function gets all chats from one user and sends it through the
+ * response parameter if the status is 200
+ * @param req
+ * @param res
+ * @returns All the chats from one user
+ */
 const getChatsFromUser = async (req: Request, res: Response) => {
   try {
     const chatsObtained = await ChatService.getChatsFromUser(req.params.iduser)
@@ -26,6 +33,13 @@ const getChatsFromUser = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function gets all messages from a chat if it is created, if it is not
+ * returns an object with an empty array.
+ * @param req
+ * @param res
+ * @returns An object with an array and a name of the user in the chat.
+ */
 const retrieveAllMessageFromChat = async (req: Request, res: Response) => {
   try {
     const { idUser, idGuestUser, name } = req.body
@@ -60,6 +74,13 @@ const retrieveAllMessageFromChat = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function updates the chat with the id of the
+ * messages passed through params.
+ * @param req
+ * @param res
+ * @returns A status message if the update was successfull
+ */
 const updateCurrentChat = async (req: Request, res: Response) => {
   try {
     const { idMessage } = req.body
@@ -89,6 +110,12 @@ const updateCurrentChat = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * This function makes a call to the database to get a chat count.
+ * @param _req
+ * @param res
+ * @returns An object with the count of the chats in the app.
+ */
 const getChatCount = async (_req: Request, res: Response) => {
   try {
     const chatCount = await ChatService.getChatsCount()
