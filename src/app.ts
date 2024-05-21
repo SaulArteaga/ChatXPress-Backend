@@ -8,12 +8,18 @@ import { ISockedRecieved } from './interfaces/ISockedRecieved'
 
 const app = express()
 const server = http.createServer(app)
+/**
+ * We create a server for the Socket
+ */
 export const io = new Server(server, {
   cors: {
     origin: '*',
   },
 })
 
+/**
+ * We create the CORS configuration to use the api
+ */
 app.use(express.json())
 app.use(function (_req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -31,12 +37,17 @@ app.get('/hello', (_req, res) => {
   res.send('Muelto')
 })
 
-// Socket Conf
+/**
+ * We create a connection for the socket
+ */
 io.on('connection', (socket: Socket) => {
   socket.on('connect', () => {
     console.log('Cliente conectado')
   })
 
+  /**
+   * We create a conection for the socket to set up a room between two client sockets.
+   */
   socket.on('join', (roomname: string) => {
     let split = roomname.split('--with--')
     let unic = [...new Set(split)].sort((a, b) => (a < b ? -1 : 1))
@@ -45,18 +56,23 @@ io.on('connection', (socket: Socket) => {
       .filter((it) => it !== socket.id)
       .forEach((id) => {
         socket.leave(id)
-        // socket.removeAllListeners(`emitMessage`)
       })
     socket.join(updateRoomName)
     console.log(socket.rooms)
   })
 
+  /**
+   * We create a connection for the socket to emit the message to the assigned room
+   */
   socket.on('emitMessage', (data: ISockedRecieved) => {
     const { message } = data
     const room = Array.from(socket.rooms).filter((it) => it !== socket.id)[0]
     socket.to(room).emit('emitMessage', message)
   })
 
+  /**
+   * We create a connection for the socket to disconnect the sockets.
+   */
   socket.on('disconnect', () => {
     socket.removeAllListeners()
   })

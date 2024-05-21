@@ -23,6 +23,10 @@ app.listen(WEB_CONFIG.PORT, () => {
   console.log('Servidor iniciado en el puerto 3000')
 })
 
+/**
+ * We launch the application by making it
+ * listen on the indicated port
+ */
 const PORT = 3001
 server.listen(PORT, () => {
   console.log(`Servidor socket.io escuchando en puerto ${PORT}`)
