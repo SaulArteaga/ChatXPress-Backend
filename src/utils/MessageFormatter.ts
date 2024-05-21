@@ -3,6 +3,12 @@ import { IchatResult } from '../interfaces/IChatResult'
 import { IMessageResponse } from '../interfaces/IMessageResponse'
 import MessageService from '../services/messages.service'
 
+/**
+ * This function returns the messages from
+ * a chat formatted with the type IMessageResponse.
+ * @param chat
+ * @returns The messages formatted
+ */
 const getAllMessagesFormatted = async (chat: IchatResult) => {
   const allMessages: IMessageResponse[] = await Promise.all(
     chat.idMessages.map(async (idMessage: Types.ObjectId) => {
