@@ -39,7 +39,7 @@ const getChatsFromUserFormatted = async (resultChats: IchatResult[], id: string)
 
         if (lastMessage) {
           newChat.lastMessage = lastMessage.content
-          newChat.time = lastMessage.dateCreated.toString()
+          newChat.time = lastMessage.dateCreated
         }
       }
 

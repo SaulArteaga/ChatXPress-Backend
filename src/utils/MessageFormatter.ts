@@ -23,7 +23,7 @@ const getAllMessagesFormatted = async (chat: IchatResult) => {
       if (message) {
         newMessage.content = message.content
         newMessage.idUser = message.idUser.toString()
-        newMessage.dateCreated = message.dateCreated.toString()
+        newMessage.dateCreated = message.dateCreated
       }
 
       return newMessage

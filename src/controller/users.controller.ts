@@ -244,8 +244,8 @@ const loginUser = async (req: Request, res: Response) => {
     const roleUser = await RoleService.getRoleId(req.body.nameRole)
     const user = await UserService.getUserByEmail(req.body.email)
     if (user != null) {
-      const comparePassword = await crypto.comparePassword(req.body.password, user.password.toString())
-      if (comparePassword && roleUser._id.toString() === user.idRole.toString()) {
+      const comparePassword = await crypto.comparePassword(req.body.password, user.password)
+      if (comparePassword && roleUser._id === user.idRole) {
         const userResponse: IUserResponse = {
           id: user._id.toString(),
           username: user.name,
