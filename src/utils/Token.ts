@@ -1,8 +1,7 @@
 import { CookieOptions } from 'express'
 import { IUserResponse } from '../interfaces/users/IUserResponse'
+import { CONFIG } from '../config/Config'
 import jwt from 'jsonwebtoken'
-
-const SECRET_KEY = 'adminadmin'
 
 const accessTokenCookieOptions: CookieOptions = {
   expires: new Date(Date.now() + 7200 * 60 * 1000),
@@ -18,7 +17,7 @@ const createToken = (user: IUserResponse): string => {
     username: user.username,
     email: user.email,
   }
-  const token = jwt.sign(payload, SECRET_KEY)
+  const token = jwt.sign(payload, CONFIG.SECRET_KEY)
   return token
 }
 
@@ -38,7 +37,7 @@ const decodeToken = (token: any) => {
  * @returns Boolean
  */
 const verifyToken = (token: any) => {
-  return jwt.verify(token, SECRET_KEY)
+  return jwt.verify(token, CONFIG.SECRET_KEY)
 }
 
 export const tokenUtils = { createToken, decodeToken, verifyToken, accessTokenCookieOptions }

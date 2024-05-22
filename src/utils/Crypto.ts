@@ -1,6 +1,5 @@
-import { hash, compare, genSaltSync } from 'bcrypt'
-
-const salt = genSaltSync(10)
+import { hash, compare } from 'bcrypt'
+import { CONFIG } from '../config/Config'
 
 /**
  * Thid function gets a password through params and converts it in a hashed password
@@ -8,7 +7,7 @@ const salt = genSaltSync(10)
  * @returns The hashed password
  */
 const hashPassword = async (plainTextPwd: string) => {
-  return await hash(plainTextPwd, salt)
+  return await hash(plainTextPwd, CONFIG.SALT)
 }
 
 /**

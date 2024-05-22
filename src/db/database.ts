@@ -1,4 +1,5 @@
 import { connect as mongooseConnect, connection } from 'mongoose'
+import { CONFIG } from '../config/Config'
 
 /**
  * This function performs the connection to the database.
@@ -6,10 +7,7 @@ import { connect as mongooseConnect, connection } from 'mongoose'
  */
 
 export const connect = async (): Promise<void> => {
-  await mongooseConnect(
-    // 'mongodb+srv://admin2:adminadmin@prueba.jjuvtzw.mongodb.net/pruebadb?retryWrites=true&w=majority',
-    'mongodb://admin:admin@localhost:27017/db_proyect?authSource=admin',
-  )
+  await mongooseConnect(CONFIG.DATABASE_URL_CONNECTION)
 }
 
 /**
