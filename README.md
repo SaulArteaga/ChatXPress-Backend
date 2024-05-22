@@ -1,59 +1,59 @@
 # ChatXPress Backend
 
-En este repositorio se encuentra ubicado el backend de la aplicación que llamamos ChatXPress. Este proyecto se compone por tres proyectos fundamentales, en el que nos ubicamos, que sería el backend, y los dos frontend que serían uno para movil y otro para Web. Este último sería una aplicación de administración de usuarios.
+In this repository is located the backend of the application that we call ChatXPress. This project is made up of three fundamental projects, the one in which we are located, which would be the backend, and the two frontends, which would be one for mobile and the other for Web. The latter would be a user administration application.
 
-Los links a los otros repositorios son los siguientes:
+The links to the other repositories are as follows:
 
 - [Frontend Web](https://github.com/SaulArteaga/ChatXPress-FrontEnd-Web.git)
-- [Frontend Movil](https://github.com/AmandaRaveloCabrera/ChatXPress-frontend.git)
+- [Frontend Mobile](https://github.com/AmandaRaveloCabrera/ChatXPress-frontend.git)
 
-Se detallará a continuación como instalar e inicializar el servidor además de la máquina de docker necesaria para el proyecto.
+The following will detail how to install and initialise the server as well as the docker machine required for the project.
 
 ## Docker
 
-Para poder iniciar el docker del proyecto se tendrá que tener instalado docker-compose. Para instalarlo refierase a [este link](https://docs.docker.com/compose/install/).
+In order to start the project docker you will need to have docker-compose installed. To install it refer to [this link](https://docs.docker.com/compose/install/).
 
-Una vez instalado se tendrá que realizar el siguiente comando estando en modo consola en la carpeta donde se situa el docker-compose:
+Once installed, the following command will have to be performed in console mode in the folder where the docker-compose is located:
 
 ```shell
 docker compose up -d
 ```
 
-Con este comando se nos creará un docker en modo detached en nuestra máquina, con lo que podremos seguir al paso siguiente.
+This command will create a detached docker on your machine, so you can move on to the next step.
 
-## Instalación de librerías
+## Installation of libraries
 
-Para el siguiente paso se tendrá que tener instalado node. Más información en [este link](https://nodejs.org/en/download).
+For the next step you will need to have node installed. More information at [this link](https://nodejs.org/en/download).
 
-Para poder ejecutar nuestra aplicación tendremos que primeramente entrar en modo consola a nuestra carpeta de proyecto.
+In order to run our application, we will first have to enter our project folder in console mode.
 
-Dentro de la carpeta de proyecto ejecutaremos el siguiente comando para poder instalar las librerías necesarias:
+Inside the project folder we will execute the following command in order to install the necessary libraries:
 
 ```shell
 npm i
 ```
 
-Se esperará a que el proceso termine y tendremos instalados los paquetes necesarios para poder ejecutar la aplicación sin problema.
+It will wait for the process to finish and we will have installed the necessary packages to be able to run the application without any problem.
 
-## Iniciar la aplicación en entorno de desarrollo
+## Start the application in development environment
 
-Para iniciar la aplicación ejecutaremos el siguiente comando:
+To start the application, run the following command:
 
 ```shell
 npm run dev
 ```
 
-Con este comando se ejecutará la app y se abrirá automáticamente una ventana de firefox.
+This command will launch the app and automatically open a firefox window.
 
-## Iniciar la aplicación en entorno de producción
+## Start the application in production environment
 
-Para iniciar la aplicación ejecutaremos los siguientes comandos:
+To start the application, execute the following commands:
 
 ```shell
 npm run build
 npm start
 ```
 
-Con este comando se ejecutará la app y se abrirá automáticamente una ventana de firefox.
+This command will launch the app and automatically open a firefox window.
 
 ---
