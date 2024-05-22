@@ -8,7 +8,7 @@
   "main": "src/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
-    "start": "node ./dist/app",
+    "start": "node ./dist/index",
     "build": "npm run clean && tsc",
     "exec": "npm run build & npm run start",
     "clean": "rimraf dist",

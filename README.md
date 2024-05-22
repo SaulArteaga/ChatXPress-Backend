@@ -50,14 +50,8 @@ Con este comando se ejecutará la app y se abrirá automáticamente una ventana 
 Para iniciar la aplicación ejecutaremos los siguientes comandos:
 
 ```shell
-npm build
+npm run build
 npm start
-```
-
-o También se pude usar este comando:
-
-```shell
-npm exec
 ```
 
 Con este comando se ejecutará la app y se abrirá automáticamente una ventana de firefox.
