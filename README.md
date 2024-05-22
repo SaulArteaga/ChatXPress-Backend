@@ -35,12 +35,29 @@ npm i
 
 Se esperará a que el proceso termine y tendremos instalados los paquetes necesarios para poder ejecutar la aplicación sin problema.
 
-## Iniciar la aplicación
+## Iniciar la aplicación en entorno de desarrollo
 
 Para iniciar la aplicación ejecutaremos el siguiente comando:
 
 ```shell
+npm run dev
+```
+
+Con este comando se ejecutará la app y se abrirá automáticamente una ventana de firefox.
+
+## Iniciar la aplicación en entorno de producción
+
+Para iniciar la aplicación ejecutaremos los siguientes comandos:
+
+```shell
+npm build
 npm start
+```
+
+o También se pude usar este comando:
+
+```shell
+npm exec
 ```
 
 Con este comando se ejecutará la app y se abrirá automáticamente una ventana de firefox.
