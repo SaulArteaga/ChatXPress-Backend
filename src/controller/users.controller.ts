@@ -66,8 +66,9 @@ const getUserById = async (req: Request, res: Response) => {
   try {
     if (!user) {
       res.status(400).send({ message: 'No existe el usuario en la base de datos' })
+    } else {
+      res.status(200).send(user)
     }
-    res.status(200).send(user)
   } catch (error) {
     res.status(500).send(error)
   }
@@ -110,8 +111,9 @@ const createUser = async (req: Request, res: Response) => {
 
       if (!resultCreateUser) {
         res.status(400).send({ message: 'Error al introducir el nuevo usuario' })
+      } else {
+        res.status(200).send({ message: 'Nuevo usuario introducido correctamente' })
       }
-      res.status(200).send({ message: 'Nuevo usuario introducido correctamente' })
     }
   } catch (error) {
     res.status(500).send(error)
@@ -245,7 +247,7 @@ const loginUser = async (req: Request, res: Response) => {
     const user = await UserService.getUserByEmail(req.body.email)
     if (user != null) {
       const comparePassword = await crypto.comparePassword(req.body.password, user.password)
-      if (comparePassword && roleUser._id === user.idRole) {
+      if (comparePassword && roleUser._id.toString() === user.idRole.toString()) {
         const userResponse: IUserResponse = {
           id: user._id.toString(),
           username: user.name,
