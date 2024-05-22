@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import ChatService from '../services/chats.service'
-import { IchatsResponse } from '../interfaces/IChatsResponse'
+import { IchatsResponse } from '../interfaces/chats/IChatsResponse'
 import ChatFormatter from '../utils/ChatFormatter'
-import { ICurrentChatRespose } from '../interfaces/ICurrentChatResponse'
-import { IChat } from '../interfaces/IChat'
+import { ICurrentChatRespose } from '../interfaces/chats/ICurrentChatResponse'
+import { IChat } from '../interfaces/chats/IChat'
 import MessageService from '../services/messages.service'
 import mongoose from 'mongoose'
-import { IchatResult } from '../interfaces/IChatResult'
+import { IchatResult } from '../interfaces/chats/IChatResult'
 
 /**
  * This function gets all chats from one user and sends it through the

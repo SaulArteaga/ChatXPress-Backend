@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import UserService from '../services/users.service'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../interfaces/users/IUser'
 import RoleService from '../services/roles.service'
-import { IUserResponse } from '../interfaces/IUserResponse'
+import { IUserResponse } from '../interfaces/users/IUserResponse'
 import { tokenUtils } from '../utils/Token'
 import { crypto } from '../utils/Crypto'
 

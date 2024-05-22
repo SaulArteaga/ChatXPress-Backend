@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
-import { IchatResult } from '../interfaces/IChatResult'
-import { IMessageResponse } from '../interfaces/IMessageResponse'
+import { IchatResult } from '../interfaces/chats/IChatResult'
+import { IMessageResponse } from '../interfaces/messages/IMessageResponse'
 import MessageService from '../services/messages.service'
 
 /**

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import MessageService from '../services/messages.service'
-import { IMessage } from '../interfaces/IMessage'
+import { IMessage } from '../interfaces/messages/IMessage'
 
 /**
  * This function returns a count of all the messages stored in the database.

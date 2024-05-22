@@ -1,4 +1,4 @@
-import { IMessageResponse } from './IMessageResponse'
+import { IMessageResponse } from '../messages/IMessageResponse'
 
 /**
  * This is the interface for the responses of the current chat

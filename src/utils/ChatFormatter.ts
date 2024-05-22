@@ -1,10 +1,10 @@
 import { Types } from 'mongoose'
-import { IchatResult } from '../interfaces/IChatResult'
-import { IchatsResponse } from '../interfaces/IChatsResponse'
+import { IchatResult } from '../interfaces/chats/IChatResult'
+import { IchatsResponse } from '../interfaces/chats/IChatsResponse'
 import MessageService from '../services/messages.service'
 import UserService from '../services/users.service'
-import { ICurrentChatRespose } from '../interfaces/ICurrentChatResponse'
-import { IMessageResponse } from '../interfaces/IMessageResponse'
+import { ICurrentChatRespose } from '../interfaces/chats/ICurrentChatResponse'
+import { IMessageResponse } from '../interfaces/messages/IMessageResponse'
 import MessageFormatter from './MessageFormatter'
 
 /**

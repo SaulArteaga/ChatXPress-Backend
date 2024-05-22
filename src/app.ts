@@ -4,7 +4,7 @@ import MessageRoutes from './routes/messages.routes'
 import ChatRoutes from './routes/chats.routes'
 import http from 'http'
 import { Server, Socket } from 'socket.io'
-import { ISockedRecieved } from './interfaces/ISockedRecieved'
+import { ISockedRecieved } from './interfaces/sockets/ISockedRecieved'
 
 const app = express()
 const server = http.createServer(app)

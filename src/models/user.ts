@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../interfaces/users/IUser'
 
 /**
  * This is the schema of a user where

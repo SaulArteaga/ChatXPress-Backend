@@ -1,5 +1,5 @@
 import { user } from '../models/user'
-import { IUser } from '../interfaces/IUser'
+import { IUser } from '../interfaces/users/IUser'
 import mongoose from 'mongoose'
 import RoleService from './roles.service'
 

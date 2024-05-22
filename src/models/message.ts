@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { IMessage } from '../interfaces/IMessage'
+import { IMessage } from '../interfaces/messages/IMessage'
 
 /**
  * This is the scheme of the messages

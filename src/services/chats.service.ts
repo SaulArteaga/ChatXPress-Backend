@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { chat } from '../models/chat'
-import { IChat } from '../interfaces/IChat'
+import { IChat } from '../interfaces/chats/IChat'
 
 /**
  * This function retrieves all the chats from the database given an user id.

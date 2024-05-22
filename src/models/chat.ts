@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { IChat } from '../interfaces/IChat'
+import { IChat } from '../interfaces/chats/IChat'
 
 /**
  * This is the scheme of the chats

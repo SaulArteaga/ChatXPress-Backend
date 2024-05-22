@@ -1,5 +1,5 @@
 import { CookieOptions } from 'express'
-import { IUserResponse } from '../interfaces/IUserResponse'
+import { IUserResponse } from '../interfaces/users/IUserResponse'
 import jwt from 'jsonwebtoken'
 
 const SECRET_KEY = 'adminadmin'

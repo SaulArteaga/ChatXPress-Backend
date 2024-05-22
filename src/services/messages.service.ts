@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { message } from '../models/message'
-import { IMessage } from '../interfaces/IMessage'
+import { IMessage } from '../interfaces/messages/IMessage'
 
 /**
  * This function returns a count of the messages that are stored in the database.
