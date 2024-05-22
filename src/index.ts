@@ -20,7 +20,7 @@ connect()
  */
 
 app.listen(WEB_CONFIG.PORT, () => {
-  console.log('Servidor iniciado en el puerto 3000')
+  console.log(`Servidor iniciado en el puerto ${WEB_CONFIG.PORT}`)
 })
 
 /**
