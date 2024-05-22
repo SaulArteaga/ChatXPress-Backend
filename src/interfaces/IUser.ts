@@ -5,11 +5,11 @@ import { Types } from 'mongoose'
  */
 
 export interface IUser {
-  name: String
-  lastname: String
-  email: String
-  department: String
+  name: string
+  lastname: string
+  email: string
+  department: string
   isActive: Boolean
-  password: String
+  password: string
   idRole: Types.ObjectId
 }

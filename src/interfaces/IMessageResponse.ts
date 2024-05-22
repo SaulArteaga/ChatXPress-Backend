@@ -3,7 +3,7 @@
  */
 export interface IMessageResponse {
   _id: string
-  content: String
+  content: string
   dateCreated: string
   idUser: string
 }

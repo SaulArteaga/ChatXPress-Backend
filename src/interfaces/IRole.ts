@@ -3,5 +3,5 @@
  */
 
 export interface IRole {
-  nameRole: String
+  nameRole: string
 }

@@ -5,7 +5,7 @@ import { Types } from 'mongoose'
  */
 
 export interface IMessage {
-  content: String
+  content: string
   idUser: Types.ObjectId
-  dateCreated: String
+  dateCreated: string
 }
