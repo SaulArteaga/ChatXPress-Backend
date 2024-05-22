@@ -17,11 +17,11 @@ const getTotalMessages = async (_req: Request, res: Response) => {
 
   try {
     if (!totalMessages) {
-      res.status(400).send({ message: 'No hay ningun mensaje en la base de datos' })
+      return res.status(400).send({ message: 'No hay ningun mensaje en la base de datos' })
     }
-    res.status(200).send({ totalMessage: totalMessages })
+    return res.status(200).send({ totalMessage: totalMessages })
   } catch (error) {
-    res.status(500).send({ message: 'server error' })
+    return res.status(500).send({ message: 'server error' })
   }
 }
 
@@ -40,11 +40,11 @@ const getMessageById = async (req: Request, res: Response) => {
 
   try {
     if (!message) {
-      res.status(400).send({ message: 'No hay ningun mensaje en la base de datos' })
+      return res.status(400).send({ message: 'No hay ningun mensaje en la base de datos' })
     }
-    res.status(200).send(message)
+    return res.status(200).send(message)
   } catch (error) {
-    res.status(500).send({ message: 'server error' })
+    return res.status(500).send({ message: 'server error' })
   }
 }
 
@@ -70,11 +70,11 @@ const createMessage = async (req: Request, res: Response) => {
     const resultCreateMessage = await MessageService.createMessage(newMessage)
 
     if (!resultCreateMessage) {
-      res.status(400).send({ message: 'Error al introducir un nuevo mensaje' })
+      return res.status(400).send({ message: 'Error al introducir un nuevo mensaje' })
     }
-    res.status(200).send(resultCreateMessage)
+    return res.status(200).send(resultCreateMessage)
   } catch (error) {
-    res.status(500).send({ message: 'server error' })
+    return res.status(500).send({ message: 'server error' })
   }
 }
 

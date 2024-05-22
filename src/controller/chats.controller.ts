@@ -86,27 +86,25 @@ const updateCurrentChat = async (req: Request, res: Response) => {
     const { idMessage } = req.body
 
     if (!idMessage) {
-      res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
-    } else {
-      const currentMessage = await MessageService.getMessageById(idMessage)
-
-      if (!currentMessage) {
-        res.status(400).send({ message: 'El mensaje no existe en la base de datos' })
-      } else {
-        const currentChat = await ChatService.retrieveAllMessageFromChat(req.params.id)
-        if (currentChat) {
-          currentChat.idMessages.push(currentMessage._id)
-          const resultChatUpdated = await ChatService.updateCurrentChat(req.params.id, currentChat)
-          if (!resultChatUpdated) {
-            res.status(400).send({ message: 'No se ha modificado correctamente en la base de datos' })
-          } else {
-            res.status(200).send({ message: 'Chat actualizado correctamente' })
-          }
-        }
-      }
+      return res.status(400).send({ message: 'No se ha introducido los datos correctamente en el body' })
     }
+    const currentMessage = await MessageService.getMessageById(idMessage)
+
+    if (!currentMessage) {
+      return res.status(400).send({ message: 'El mensaje no existe en la base de datos' })
+    }
+    const currentChat = await ChatService.retrieveAllMessageFromChat(req.params.id)
+    if (!currentChat) {
+      return res.status(400).send({ message: 'El chat no existe en la base de datos' })
+    }
+    currentChat.idMessages.push(currentMessage._id)
+    const resultChatUpdated = await ChatService.updateCurrentChat(req.params.id, currentChat)
+    if (!resultChatUpdated) {
+      return res.status(400).send({ message: 'No se ha modificado correctamente en la base de datos' })
+    }
+    return res.status(200).send({ message: 'Chat actualizado correctamente' })
   } catch (error) {
-    res.status(500).send({ message: 'server error' })
+    return res.status(500).send({ message: 'server error' })
   }
 }
 
@@ -120,13 +118,11 @@ const getChatCount = async (_req: Request, res: Response) => {
   try {
     const chatCount = await ChatService.getChatsCount()
     if (!chatCount) {
-      res.status(400).send({ message: 'No existen usuarios en la base de datos' })
-    } else {
-      res.status(200).send(chatCount)
+      return res.status(400).send({ message: 'No existen usuarios en la base de datos' })
     }
+    return res.status(200).send(chatCount)
   } catch (error) {
-    console.log(error)
-    res.status(500).send({ message: 'Server error' })
+    return res.status(500).send({ message: 'Server error' })
   }
 }
 

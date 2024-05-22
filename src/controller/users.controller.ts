@@ -21,11 +21,11 @@ const getUsers = async (_req: Request, res: Response) => {
   const users = await UserService.getUsers()
   try {
     if (!users) {
-      res.status(400).send({ message: 'No hay ningun usuario en la base de datos' })
+      return res.status(400).send({ message: 'No hay ningun usuario en la base de datos' })
     }
-    res.status(200).send(users)
+    return res.status(200).send(users)
   } catch (error) {
-    res.status(500).send({ message: 'server error' })
+    return res.status(500).send({ message: 'server error' })
   }
 }
 
@@ -40,12 +40,11 @@ const getTotalUsers = async (_req: Request, res: Response) => {
   const totalUsers = await UserService.getTotalUsers()
   try {
     if (!totalUsers) {
-      res.status(400).send({ message: 'No existen usuarios en la base de datos' })
-    } else {
-      res.status(200).send(totalUsers)
+      return res.status(400).send({ message: 'No existen usuarios en la base de datos' })
     }
+    return res.status(200).send(totalUsers)
   } catch (error) {
-    res.status(500).send({ message: 'Server error' })
+    return res.status(500).send({ message: 'Server error' })
   }
 }
 
@@ -65,12 +64,11 @@ const getUserById = async (req: Request, res: Response) => {
   const user = await UserService.getUserById(req.params.id)
   try {
     if (!user) {
-      res.status(400).send({ message: 'No existe el usuario en la base de datos' })
-    } else {
-      res.status(200).send(user)
+      return res.status(400).send({ message: 'No existe el usuario en la base de datos' })
     }
+    return res.status(200).send(user)
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
@@ -94,29 +92,27 @@ const createUser = async (req: Request, res: Response) => {
     const idRoleUser = await RoleService.getRoleId('user')
     const user = await UserService.getUserByEmail(req.body.email)
     if (user != null) {
-      res.status(400).send({ message: 'Error ya existe ese usuario' })
-    } else {
-      const hashedPassword = await crypto.hashPassword(req.body.password)
-      const newuser: IUser = {
-        name: req.body.name,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        department: req.body.department,
-        isActive: false,
-        password: hashedPassword,
-        idRole: idRoleUser._id,
-      }
-
-      const resultCreateUser = await UserService.createUser(newuser)
-
-      if (!resultCreateUser) {
-        res.status(400).send({ message: 'Error al introducir el nuevo usuario' })
-      } else {
-        res.status(200).send({ message: 'Nuevo usuario introducido correctamente' })
-      }
+      return res.status(400).send({ message: 'Error ya existe ese usuario' })
     }
+    const hashedPassword = await crypto.hashPassword(req.body.password)
+    const newuser: IUser = {
+      name: req.body.name,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      department: req.body.department,
+      isActive: false,
+      password: hashedPassword,
+      idRole: idRoleUser._id,
+    }
+
+    const resultCreateUser = await UserService.createUser(newuser)
+
+    if (!resultCreateUser) {
+      return res.status(400).send({ message: 'Error al introducir el nuevo usuario' })
+    }
+    return res.status(200).send({ message: 'Nuevo usuario introducido correctamente' })
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
@@ -136,12 +132,11 @@ const getUserByEmail = async (req: Request, res: Response) => {
   try {
     const user = await UserService.getUserByEmail(req.params.email)
     if (user == null) {
-      res.status(400).send({ message: 'No existe el usuario en la base de datos' })
-    } else {
-      res.status(200).send(user)
+      return res.status(400).send({ message: 'No existe el usuario en la base de datos' })
     }
+    return res.status(200).send(user)
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
@@ -156,12 +151,11 @@ const getActiveUsers = async (_req: Request, res: Response) => {
   const activeUsers = await UserService.getActiveUsers()
   try {
     if (!activeUsers) {
-      res.status(400).send({ message: 'No existen usuarios en la base de datos' })
-    } else {
-      res.status(200).send(activeUsers)
+      return res.status(400).send({ message: 'No existen usuarios en la base de datos' })
     }
+    return res.status(200).send(activeUsers)
   } catch (error) {
-    res.status(500).send({ message: 'Server error' })
+    return res.status(500).send({ message: 'Server error' })
   }
 }
 
@@ -195,12 +189,11 @@ const updateUserByEmail = async (req: Request, res: Response) => {
 
     const resultUpdateUser = await UserService.updateUserByEmail(req.params.email, updatedUser)
     if (resultUpdateUser.modifiedCount == 0) {
-      res.status(400).send({ message: 'No existe usuario en la base de datos' })
-    } else {
-      res.status(200).send({ message: 'Usuario actualizado correctamente' })
+      return res.status(400).send({ message: 'No existe usuario en la base de datos' })
     }
+    return res.status(200).send({ message: 'Usuario actualizado correctamente' })
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
@@ -221,12 +214,11 @@ const deleteUserByEmail = async (req: Request, res: Response) => {
   try {
     const resultDeleteUser = await UserService.deleteUserByEmail(req.params.email)
     if (resultDeleteUser.deletedCount == 0) {
-      res.status(400).send({ message: 'No existe usuario en la base de datos' })
-    } else {
-      res.status(200).send({ message: 'Usuario eliminado correctamente' })
+      return res.status(400).send({ message: 'No existe usuario en la base de datos' })
     }
+    return res.status(200).send({ message: 'Usuario eliminado correctamente' })
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
@@ -245,35 +237,37 @@ const loginUser = async (req: Request, res: Response) => {
   try {
     const roleUser = await RoleService.getRoleId(req.body.nameRole)
     const user = await UserService.getUserByEmail(req.body.email)
-    if (user != null) {
-      const comparePassword = await crypto.comparePassword(req.body.password, user.password)
-      if (comparePassword && roleUser._id.toString() === user.idRole.toString()) {
-        const userResponse: IUserResponse = {
-          id: user._id.toString(),
-          username: user.name,
-          email: user.email,
-        }
-        const token = tokenUtils.createToken(userResponse)
-        const updatedUser: IUser = {
-          name: user.name,
-          lastname: user.lastname,
-          email: user.email,
-          department: user.department,
-          isActive: true,
-          password: user.password,
-          idRole: user.idRole,
-        }
-        await UserService.updateUserByEmail(req.body.email, updatedUser)
 
-        res.status(200).send({ ...userResponse, token })
-      } else {
-        res.status(400).send({ message: 'Usuario incorrecto' })
-      }
-    } else {
-      res.status(400).send({ message: 'Error no existe el usuario' })
+    if (user == null) {
+      return res.status(400).send({ message: 'Error no existe el usuario' })
     }
+
+    const comparePassword = await crypto.comparePassword(req.body.password, user.password)
+
+    if (!comparePassword || roleUser._id.toString() !== user.idRole.toString()) {
+      return res.status(400).send({ message: 'Usuario incorrecto' })
+    }
+
+    const userResponse: IUserResponse = {
+      id: user._id.toString(),
+      username: user.name,
+      email: user.email,
+    }
+    const token = tokenUtils.createToken(userResponse)
+    const updatedUser: IUser = {
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      department: user.department,
+      isActive: true,
+      password: user.password,
+      idRole: user.idRole,
+    }
+    await UserService.updateUserByEmail(req.body.email, updatedUser)
+
+    return res.status(200).send({ ...userResponse, token })
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
@@ -300,13 +294,12 @@ const logoutUser = async (req: Request, res: Response) => {
       idRole: user.idRole,
     }
     const update = await UserService.updateUserByEmail(req.body.email, updatedUser)
-    if (update.modifiedCount != 0) {
-      res.status(200).send({ message: 'Usuario deslogeado' })
-    } else {
-      res.status(400).send({ message: 'No se ha podido deslogear' })
+    if (update.modifiedCount == 0) {
+      return res.status(400).send({ message: 'No se ha podido deslogear' })
     }
+    return res.status(200).send({ message: 'Usuario deslogeado' })
   } catch (error) {
-    res.status(500).send(error)
+    return res.status(500).send(error)
   }
 }
 
