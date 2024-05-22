@@ -1,4 +1,4 @@
-import { WEB_CONFIG } from './constants/web.config'
+import { CONFIG } from './config/Config'
 import { app, server } from './app'
 import { connect } from './db/database'
 
@@ -19,15 +19,14 @@ connect()
  * listen on the indicated port
  */
 
-app.listen(WEB_CONFIG.PORT, () => {
-  console.log(`Servidor iniciado en el puerto ${WEB_CONFIG.PORT}`)
+app.listen(CONFIG.PORT, () => {
+  console.log(`Servidor iniciado en el puerto ${CONFIG.PORT}`)
 })
 
 /**
  * We launch the application by making it
  * listen on the indicated port
  */
-const PORT = 3001
-server.listen(PORT, () => {
-  console.log(`Servidor socket.io escuchando en puerto ${PORT}`)
+server.listen(CONFIG.PORT_SOCKET, () => {
+  console.log(`Servidor socket.io escuchando en puerto ${CONFIG.PORT_SOCKET}`)
 })

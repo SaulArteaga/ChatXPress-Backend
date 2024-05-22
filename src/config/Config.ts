@@ -2,11 +2,10 @@
  * This is where the configuration constants are stored.
  */
 
-const WEB_URL = 'http://localhost:3000'
-
 const PORT = 3002
+const PORT_SOCKET = 3001
 
-export const WEB_CONFIG = {
-  WEB_URL: WEB_URL,
+export const CONFIG = {
   PORT: PORT,
+  PORT_SOCKET: PORT_SOCKET,
 }
